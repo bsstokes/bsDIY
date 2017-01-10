@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bsstokes.bsdiy.api.DiyApi;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 
 import java.util.List;
 

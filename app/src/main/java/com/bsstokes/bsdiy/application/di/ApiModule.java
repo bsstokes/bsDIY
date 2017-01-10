@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.BsDiyApplication;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.BuildConfig;
 import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.api.DiyApi;

@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy;
+package com.bsstokes.bsdiy.application;
 
 import android.app.Activity;
 import android.app.Application;

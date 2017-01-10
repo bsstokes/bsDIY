@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.BsDiyApplication;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 
 import javax.inject.Singleton;
 
