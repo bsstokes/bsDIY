@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 
@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.internal.Preconditions;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -37,24 +38,25 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
 
+    @BindView(R.id.diy_info_text_view) TextView diyInfoTextView;
+    @BindView(R.id.skills_text_view) TextView skillsTextView;
+
     @Inject DiyApi diyApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BsDiyApplication.getApplication(this).appComponent().inject(this);
-
-        if (null == diyApi) {
-            throw new NullPointerException("diyApi");
-        }
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        BsDiyApplication.getApplication(this).appComponent().inject(this);
+        Preconditions.checkNotNull(diyApi);
 
         setSupportActionBar(toolbar);
 
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -137,8 +139,6 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    private static final String TAG = "MainActivity";
-
     private void displayResponse(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
         if (null != response) {
             if (null != response.body()) {
@@ -148,9 +148,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void displayResponse(DiyApi.DiyResponse<DiyApi.DiyInfo> diyResponse) {
-        if (null != diyResponse) {
-            Log.d(TAG, "displayResponse: diyResponse=" + diyResponse);
-            Toast.makeText(this, "diyResponse=" + diyResponse, Toast.LENGTH_SHORT).show();
+        if (null != diyResponse && null != diyResponse.response) {
+            diyInfoTextView.setText(diyResponse.response.toString());
         }
     }
 
@@ -196,8 +195,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onDownloadSkills(List<DiyApi.Skill> skills) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
         for (final DiyApi.Skill skill : skills) {
-            Log.d(TAG, "onDownloadSkills: skill=" + skill);
+            stringBuilder.append(skill.toString());
+            stringBuilder.append("\n");
         }
+
+        final String skillsText = stringBuilder.toString();
+        skillsTextView.setText(skillsText);
     }
 }
