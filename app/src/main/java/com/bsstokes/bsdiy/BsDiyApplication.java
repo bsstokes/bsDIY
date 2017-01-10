@@ -1,14 +1,14 @@
 package com.bsstokes.bsdiy;
 
 import android.app.Application;
-import android.util.Log;
+
+import com.bsstokes.bsdiy.application.initializers.StethoInitializer;
 
 public class BsDiyApplication extends Application {
-    private static final String TAG = "BsDiyApplication";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "I'm a custom Application.");
+        StethoInitializer.initialize(this);
     }
 }
