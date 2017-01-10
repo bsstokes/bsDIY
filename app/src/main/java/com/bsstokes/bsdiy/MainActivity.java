@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             downloadSomething();
         } else if (id == R.id.nav_gallery) {
-
+            downloadSkills();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -163,6 +165,53 @@ public class MainActivity extends AppCompatActivity
         if (null != diyResponse) {
             Log.d(TAG, "displayResponse: diyResponse=" + diyResponse);
             Toast.makeText(this, "diyResponse=" + diyResponse, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void downloadSkills() {
+        diyApi.getSkills()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>>() {
+                    private static final String TAG = "DiyApi getSkills";
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "onSubscribe: d=" + d);
+                    }
+
+                    @Override
+                    public void onNext(Response<DiyApi.DiyResponse<List<DiyApi.Skill>>> response) {
+                        onDownloadSkillsResponse(response);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: diyApi getSkills", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+    private void onDownloadSkillsResponse(Response<DiyApi.DiyResponse<List<DiyApi.Skill>>> response) {
+        if (null != response && null != response.body()) {
+            onDownloadSkillsResponse(response.body());
+        }
+    }
+
+    private void onDownloadSkillsResponse(DiyApi.DiyResponse<List<DiyApi.Skill>> skillsResponse) {
+        if (null != skillsResponse && null != skillsResponse.response) {
+            onDownloadSkills(skillsResponse.response);
+        }
+    }
+
+    private void onDownloadSkills(List<DiyApi.Skill> skills) {
+        for (final DiyApi.Skill skill : skills) {
+            Log.d(TAG, "onDownloadSkills: skill=" + skill);
         }
     }
 }
