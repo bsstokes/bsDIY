@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.application.initializers;
 
-import com.bsstokes.bsdiy.BsDiyApplication;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 
 public class StethoInitializer {
     @SuppressWarnings("UnusedParameters")
