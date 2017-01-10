@@ -14,7 +14,6 @@
     tools:context="com.bsstokes.bsdiy.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
     <TextView
         android:id="@+id/diy_info_text_view"
         android:layout_width="match_parent"
@@ -22,10 +21,15 @@
         android:layout_alignParentTop="true"
         tools:text="@string/diy_info"/>
 
-    <TextView
-        android:id="@+id/skills_text_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/diy_info_text_view"
-        tools:text="@string/skills"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/diy_info_text_view">
+
+        <TextView
+            android:id="@+id/skills_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/skills"/>
+    </ScrollView>
 </RelativeLayout>

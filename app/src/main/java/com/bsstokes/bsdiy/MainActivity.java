@@ -176,7 +176,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private static final String TAG = "MainActivity";
+
     private void onDownloadSkills(List<DiyApi.Skill> skills) {
+        Log.d(TAG, "onDownloadSkills: Downloaded " + skills.size() + " skills");
+
         final StringBuilder stringBuilder = new StringBuilder();
 
         for (final DiyApi.Skill skill : skills) {

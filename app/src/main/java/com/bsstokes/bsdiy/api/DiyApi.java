@@ -12,7 +12,7 @@ public interface DiyApi {
     @GET("/")
     Observable<Response<DiyResponse<DiyInfo>>> getApiInfo();
 
-    @GET("/skills")
+    @GET("/skills?limit=1000&offset=0")
     Observable<Response<DiyResponse<List<Skill>>>> getSkills();
 
     class DiyResponse<T> {
