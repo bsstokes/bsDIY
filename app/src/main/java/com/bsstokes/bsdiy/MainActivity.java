@@ -9,31 +9,29 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import com.bsstokes.bsdiy.api.DiyApi;
 
-import static com.bsstokes.bsdiy.application.di.ApiModule.USER_AGENT;
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Inject
-    @Named(USER_AGENT) String userAgent;
+    @Inject DiyApi diyApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BsDiyApplication.getApplication(this).appComponent().inject(this);
 
-        Log.d("MainActivity", "userAgent=" + userAgent);
+        if (null == diyApi) {
+            throw new NullPointerException("diyApi");
+        }
 
         setContentView(R.layout.activity_main);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
