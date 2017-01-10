@@ -8,10 +8,11 @@ public interface DiyApi {
     String ENDPOINT = "https://api.diy.org/";
 
     @GET("/")
-    Observable<Response<InfoResponse>> getApiInfo();
+    Observable<Response<DiyResponse<DiyInfo>>> getApiInfo();
 
-    class InfoResponse {
+    class DiyResponse<T> {
         Head head = new Head();
+        T response;
 
         static class Head {
             int code;
@@ -42,28 +43,26 @@ public interface DiyApi {
             }
         }
 
-        Info response = new Info();
-
-        static class Info {
-            String docs = "";
-            String help = "";
-            String twitter = "";
-
-            @Override
-            public String toString() {
-                return "Info{" +
-                        "docs='" + docs + '\'' +
-                        ", help='" + help + '\'' +
-                        ", twitter='" + twitter + '\'' +
-                        '}';
-            }
+        @Override
+        public String toString() {
+            return "DiyResponse{" +
+                    "head=" + head +
+                    ", response=" + response +
+                    '}';
         }
+    }
+
+    class DiyInfo {
+        String docs = "";
+        String help = "";
+        String twitter = "";
 
         @Override
         public String toString() {
-            return "InfoResponse{" +
-                    "head=" + head +
-                    ", response=" + response +
+            return "DiyInfo{" +
+                    "docs='" + docs + '\'' +
+                    ", help='" + help + '\'' +
+                    ", twitter='" + twitter + '\'' +
                     '}';
         }
     }

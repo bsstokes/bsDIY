@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         diyApi.getApiInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<DiyApi.InfoResponse>>() {
+                .subscribe(new Observer<Response<DiyApi.DiyResponse<DiyApi.DiyInfo>>>() {
                     private static final String TAG = "DiyApi getApiInfo";
 
                     @Override
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity
                     }
 
                     @Override
-                    public void onNext(Response<DiyApi.InfoResponse> response) {
+                    public void onNext(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
                         displayResponse(response);
                     }
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = "MainActivity";
 
-    private void displayResponse(Response<DiyApi.InfoResponse> response) {
+    private void displayResponse(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
         if (null != response) {
             if (null != response.body()) {
                 displayResponse(response.body());
@@ -159,10 +159,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void displayResponse(DiyApi.InfoResponse infoResponse) {
-        if (null != infoResponse) {
-            Log.d(TAG, "displayResponse: infoResponse=" + infoResponse);
-            Toast.makeText(this, "infoResponse=" + infoResponse, Toast.LENGTH_SHORT).show();
+    private void displayResponse(DiyApi.DiyResponse<DiyApi.DiyInfo> diyResponse) {
+        if (null != diyResponse) {
+            Log.d(TAG, "displayResponse: diyResponse=" + diyResponse);
+            Toast.makeText(this, "diyResponse=" + diyResponse, Toast.LENGTH_SHORT).show();
         }
     }
 }
