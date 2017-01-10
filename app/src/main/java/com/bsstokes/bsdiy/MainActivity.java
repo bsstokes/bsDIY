@@ -26,11 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.internal.Preconditions;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -103,11 +102,6 @@ public class MainActivity extends AppCompatActivity
                     private static final String TAG = "DiyApi getApiInfo";
 
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d(TAG, "onSubscribe: d=" + d);
-                    }
-
-                    @Override
                     public void onNext(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
                         displayResponse(response);
                     }
@@ -118,8 +112,8 @@ public class MainActivity extends AppCompatActivity
                     }
 
                     @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete");
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted");
                     }
                 });
     }
@@ -146,11 +140,6 @@ public class MainActivity extends AppCompatActivity
                     private static final String TAG = "DiyApi getSkills";
 
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d(TAG, "onSubscribe: d=" + d);
-                    }
-
-                    @Override
                     public void onNext(Response<DiyApi.DiyResponse<List<DiyApi.Skill>>> response) {
                         onDownloadSkillsResponse(response);
                     }
@@ -161,8 +150,8 @@ public class MainActivity extends AppCompatActivity
                     }
 
                     @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete");
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted");
                     }
                 });
     }

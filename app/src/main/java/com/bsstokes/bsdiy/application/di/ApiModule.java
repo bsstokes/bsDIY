@@ -1,11 +1,10 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.BuildConfig;
 import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.api.UserAgentInterceptor;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,6 +13,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 @Module
@@ -29,7 +29,7 @@ public class ApiModule {
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DiyApi.ENDPOINT)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build();
         return retrofit.create(DiyApi.class);

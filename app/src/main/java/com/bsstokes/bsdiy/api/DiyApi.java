@@ -2,9 +2,9 @@ package com.bsstokes.bsdiy.api;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import rx.Observable;
 
 public interface DiyApi {
     String ENDPOINT = "https://api.diy.org/";
