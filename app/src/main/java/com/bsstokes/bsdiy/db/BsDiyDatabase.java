@@ -1,4 +1,4 @@
 package com.bsstokes.bsdiy.db;
 
-public class BsDiyDatabase {
+public interface BsDiyDatabase {
 }
