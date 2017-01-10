@@ -9,13 +9,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -94,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            downloadSomething();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -110,5 +118,51 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void downloadSomething() {
+        diyApi.getApiInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<DiyApi.InfoResponse>>() {
+                    private static final String TAG = "DiyApi getApiInfo";
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "onSubscribe: d=" + d);
+                    }
+
+                    @Override
+                    public void onNext(Response<DiyApi.InfoResponse> response) {
+                        displayResponse(response);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+    private static final String TAG = "MainActivity";
+
+    private void displayResponse(Response<DiyApi.InfoResponse> response) {
+        if (null != response) {
+            if (null != response.body()) {
+                displayResponse(response.body());
+            }
+        }
+    }
+
+    private void displayResponse(DiyApi.InfoResponse infoResponse) {
+        if (null != infoResponse) {
+            Log.d(TAG, "displayResponse: infoResponse=" + infoResponse);
+            Toast.makeText(this, "infoResponse=" + infoResponse, Toast.LENGTH_SHORT).show();
+        }
     }
 }
