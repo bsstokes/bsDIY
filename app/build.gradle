@@ -33,9 +33,14 @@ android {
 }
 
 dependencies {
+    // Android Support Library
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:support-v4:25.1.0'
+
+    // Dagger
+    compile 'com.google.dagger:dagger:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
 
     debugCompile 'com.facebook.stetho:stetho:1.4.2'
 
