@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
+import com.bsstokes.bsdiy.db.BsDiyDatabase;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.diy_info_text_view) TextView diyInfoTextView;
     @BindView(R.id.skills_text_view) TextView skillsTextView;
 
+    @Inject BsDiyDatabase database;
     @Inject DiyApi diyApi;
 
     @Override
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         BsDiyApplication.getApplication(this).appComponent().inject(this);
+        Preconditions.checkNotNull(database);
         Preconditions.checkNotNull(diyApi);
 
         setSupportActionBar(toolbar);
