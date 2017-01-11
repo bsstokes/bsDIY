@@ -84,10 +84,10 @@ class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
         final DiyApi.Skill.Images images = skill.images;
         if (null == images) {
             return null;
-        } else if (!TextUtils.isEmpty(images.medium)) {
-            return DiyApi.Helper.normalizeUrl(images.medium);
         } else if (!TextUtils.isEmpty(images.large)) {
             return DiyApi.Helper.normalizeUrl(images.large);
+        } else if (!TextUtils.isEmpty(images.medium)) {
+            return DiyApi.Helper.normalizeUrl(images.medium);
         } else if (!TextUtils.isEmpty(images.small)) {
             return DiyApi.Helper.normalizeUrl(images.small);
         } else {
