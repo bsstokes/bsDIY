@@ -33,6 +33,19 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
         briteDatabase.insert("skills", createSkill(skill), CONFLICT_REPLACE);
     }
 
+    @Override
+    public void putSkills(List<DiyApi.Skill> skills) {
+        final BriteDatabase.Transaction transaction = briteDatabase.newTransaction();
+        try {
+            for (final DiyApi.Skill skill : skills) {
+                putSkill(skill);
+            }
+            transaction.markSuccessful();
+        } finally {
+            transaction.end();
+        }
+    }
+
     @NonNull
     private ContentValues createSkill(@NonNull DiyApi.Skill skill) {
         final ContentValues contentValues = new ContentValues();

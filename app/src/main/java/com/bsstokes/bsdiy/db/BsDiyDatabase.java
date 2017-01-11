@@ -10,4 +10,6 @@ public interface BsDiyDatabase {
     Observable<List<DiyApi.Skill>> getAllSkills();
 
     void putSkill(DiyApi.Skill skill);
+
+    void putSkills(List<DiyApi.Skill> skills);
 }

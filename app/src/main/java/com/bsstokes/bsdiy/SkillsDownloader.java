@@ -11,19 +11,19 @@ import java.util.List;
 import retrofit2.Response;
 import rx.Observer;
 
-public class SkillsDownloader {
+class SkillsDownloader {
+
+    private static final String TAG = "SkillsDownloader";
 
     private final @NonNull DiyApi diyApi;
     private final @NonNull BsDiyDatabase database;
 
-    public SkillsDownloader(@NonNull DiyApi diyApi, @NonNull BsDiyDatabase database) {
+    SkillsDownloader(@NonNull DiyApi diyApi, @NonNull BsDiyDatabase database) {
         this.diyApi = diyApi;
         this.database = database;
     }
 
-    private static final String TAG = "SkillsDownloader";
-    public void syncSkills() {
-
+    void syncSkills() {
         Log.d(TAG, "syncSkills: thread=" + Thread.currentThread().getName());
 
         diyApi.getSkills()
@@ -62,9 +62,7 @@ public class SkillsDownloader {
 
     private void onDownloadSkills(List<DiyApi.Skill> skills) {
         if (null != skills) {
-            for (final DiyApi.Skill skill : skills) {
-                database.putSkill(skill);
-            }
+            database.putSkills(skills);
         }
     }
 }
