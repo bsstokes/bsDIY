@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 import com.bsstokes.bsdiy.application.di.AppComponent;
 import com.bsstokes.bsdiy.application.di.ComponentFactory;
 import com.bsstokes.bsdiy.application.initializers.StethoInitializer;
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 public class BsDiyApplication extends Application {
 
@@ -26,6 +29,8 @@ public class BsDiyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Fabric.with(this, new Crashlytics());
 
         appComponent = ComponentFactory.create(this);
         appComponent.inject(this);

@@ -27,6 +27,10 @@
         <service
             android:name=".SkillsSyncService"
             android:exported="false"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c53b7143afb848fea60149d3edc66591dda0d90e"/>
     </application>
 
 </manifest>
