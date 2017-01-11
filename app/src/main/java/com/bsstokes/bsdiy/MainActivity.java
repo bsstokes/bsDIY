@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @OnClick(R.id.fab)
     void onClickFab(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, R.string.post_a_project, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 

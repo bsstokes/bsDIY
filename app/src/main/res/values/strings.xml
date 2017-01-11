@@ -12,6 +12,8 @@
     <string name="stream">Stream</string>
     <string name="to_dos">To-Do&#8217;s</string>
 
+    <string name="post_a_project">Post A Project</string>
+
     <!-- Placeholders -->
     <string name="user_name_placeholder">Brain Behold</string>
 </resources>
