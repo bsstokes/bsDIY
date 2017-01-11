@@ -1,7 +1,8 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.MainActivity;
+import com.bsstokes.bsdiy.SkillsSyncService;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
 
 public interface AppComponent {
     // Application
@@ -9,4 +10,7 @@ public interface AppComponent {
 
     // Activities
     void inject(MainActivity activity);
+
+    // Services
+    void inject(SkillsSyncService service);
 }

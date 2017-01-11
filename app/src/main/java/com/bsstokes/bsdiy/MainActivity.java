@@ -29,12 +29,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.internal.Preconditions;
 import retrofit2.Response;
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -165,19 +163,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void downloadSkills() {
-        Log.d(TAG, "downloadSkills: thread=" + Thread.currentThread().getName());
-
-        Observable.defer(new Func0<Observable<Boolean>>() {
-            @Override
-            public Observable<Boolean> call() {
-                SkillsDownloader skillsDownloader = new SkillsDownloader(diyApi, database);
-                skillsDownloader.syncSkills();
-                return Observable.just(true);
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+        SkillsSyncService.startActionSyncSkills(this);
     }
 
     private static final String TAG = "MainActivity";
