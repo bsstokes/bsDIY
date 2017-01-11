@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bsstokes.bsdiy.application.BsDiyApplication;
+import com.bsstokes.bsdiy.messages.MessagesFragment;
 import com.bsstokes.bsdiy.skills.SkillsFragment;
 
 import butterknife.BindView;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements
         final int itemId = item.getItemId();
 
         if (R.id.nav_messages == itemId) {
-            showSnackbar(item.getTitle());
+            onMessagesNavigationItemSelected();
         } else if (R.id.nav_to_dos == itemId) {
             showSnackbar(item.getTitle());
         } else if (R.id.nav_skills == itemId) {
@@ -99,11 +101,20 @@ public class MainActivity extends AppCompatActivity implements
         SkillsSyncService.startActionSyncSkills(this);
 
         if (!isFragmentLoaded(SkillsFragment.TAG)) {
-            final SkillsFragment skillsFragment = SkillsFragment.newInstance();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_view, skillsFragment, SkillsFragment.TAG)
-                    .commit();
+            loadFragment(SkillsFragment.newInstance(), SkillsFragment.TAG);
         }
+    }
+
+    private void onMessagesNavigationItemSelected() {
+        if (!isFragmentLoaded(MessagesFragment.TAG)) {
+            loadFragment(MessagesFragment.newInstance(), MessagesFragment.TAG);
+        }
+    }
+
+    private void loadFragment(Fragment fragment, @NonNull String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_view, fragment, tag)
+                .commit();
     }
 
     private boolean isFragmentLoaded(String tag) {
