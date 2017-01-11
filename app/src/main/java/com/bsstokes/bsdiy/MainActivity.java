@@ -15,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bsstokes.bsdiy.application.BsDiyApplication;
+import com.bsstokes.bsdiy.explore.ExploreFragment;
 import com.bsstokes.bsdiy.messages.MessagesFragment;
 import com.bsstokes.bsdiy.skills.SkillsFragment;
+import com.bsstokes.bsdiy.stream.StreamFragment;
+import com.bsstokes.bsdiy.to_dos.ToDosFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,13 +81,13 @@ public class MainActivity extends AppCompatActivity implements
         if (R.id.nav_messages == itemId) {
             onMessagesNavigationItemSelected();
         } else if (R.id.nav_to_dos == itemId) {
-            showSnackbar(item.getTitle());
+            onToDosNavigationItemSelected();
         } else if (R.id.nav_skills == itemId) {
             onSkillsNavigationItemSelected();
         } else if (R.id.nav_stream == itemId) {
-            showSnackbar(item.getTitle());
+            onStreamNavigationItemSelected();
         } else if (R.id.nav_explore == itemId) {
-            showSnackbar(item.getTitle());
+            onExploreNavigationItemSelected();
         } else {
             Log.e(TAG, "Unknown navigation item selected");
         }
@@ -108,6 +111,24 @@ public class MainActivity extends AppCompatActivity implements
     private void onMessagesNavigationItemSelected() {
         if (!isFragmentLoaded(MessagesFragment.TAG)) {
             loadFragment(MessagesFragment.newInstance(), MessagesFragment.TAG);
+        }
+    }
+
+    private void onToDosNavigationItemSelected() {
+        if (!isFragmentLoaded(ToDosFragment.TAG)) {
+            loadFragment(ToDosFragment.newInstance(), ToDosFragment.TAG);
+        }
+    }
+
+    private void onStreamNavigationItemSelected() {
+        if (!isFragmentLoaded(StreamFragment.TAG)) {
+            loadFragment(StreamFragment.newInstance(), StreamFragment.TAG);
+        }
+    }
+
+    private void onExploreNavigationItemSelected() {
+        if (!isFragmentLoaded(ExploreFragment.TAG)) {
+            loadFragment(ExploreFragment.newInstance(), ExploreFragment.TAG);
         }
     }
 

@@ -12,6 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        tools:text="@string/messages"/>
+        tools:text="@string/explore"/>
 
 </LinearLayout>
