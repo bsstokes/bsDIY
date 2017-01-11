@@ -8,6 +8,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,12 +46,13 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view) NavigationView navigationView;
 
     @BindView(R.id.diy_info_text_view) TextView diyInfoTextView;
-    @BindView(R.id.skills_text_view) TextView skillsTextView;
+    @BindView(R.id.skills_list) RecyclerView skillsListRecyclerView;
 
     @Inject BsDiyDatabase database;
     @Inject DiyApi diyApi;
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
+    private SkillsAdapter skillsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,10 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        skillsAdapter = new SkillsAdapter(this);
+        skillsListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        skillsListRecyclerView.setAdapter(skillsAdapter);
     }
 
     @Override
@@ -107,7 +114,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onLoadSkills(String string) {
-        skillsTextView.setText(string);
     }
 
     @Override
@@ -187,5 +193,4 @@ public class MainActivity extends AppCompatActivity
         SkillsSyncService.startActionSyncSkills(this);
     }
 
-    private static final String TAG = "MainActivity";
 }

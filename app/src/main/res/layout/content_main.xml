@@ -21,15 +21,10 @@
         android:layout_alignParentTop="true"
         tools:text="@string/diy_info"/>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/skills_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/diy_info_text_view">
+        android:layout_below="@id/diy_info_text_view"/>
 
-        <TextView
-            android:id="@+id/skills_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/skills"/>
-    </ScrollView>
 </RelativeLayout>
