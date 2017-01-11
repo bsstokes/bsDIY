@@ -6,7 +6,10 @@ import android.support.annotation.NonNull;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
 import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.QueryObservable;
+
+import java.util.List;
+
+import rx.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
 
@@ -19,8 +22,9 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
-    public QueryObservable getAllSkills() {
-        return briteDatabase.createQuery("skills", "SELECT * FROM skills");
+    public Observable<List<DiyApi.Skill>> getAllSkills() {
+        return briteDatabase.createQuery("skills", "SELECT * FROM skills")
+                .mapToList(new SkillMapper());
     }
 
     @Override

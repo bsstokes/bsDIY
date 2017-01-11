@@ -17,10 +17,8 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
-import com.squareup.sqlbrite.QueryObservable;
-import com.squareup.sqlbrite.SqlBrite;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,10 +27,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.internal.Preconditions;
 import retrofit2.Response;
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -76,17 +76,38 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        final QueryObservable skills = database.getAllSkills();
+        final Observable<String> getAllSkills = database.getAllSkills()
+                .subscribeOn(Schedulers.io())
+                .flatMap(new Func1<List<DiyApi.Skill>, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(List<DiyApi.Skill> skills) {
+                        if (null == skills) {
+                            return Observable.just("");
+                        } else {
+                            final StringBuilder stringBuilder = new StringBuilder();
+                            for (final DiyApi.Skill skill : skills) {
+                                stringBuilder.append(skill.toString());
+                                stringBuilder.append("\n");
+                            }
+                            return Observable.just(stringBuilder.toString());
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread());
 
-        final AtomicInteger queries = new AtomicInteger();
-        Subscription s = skills.subscribe(new Action1<SqlBrite.Query>() {
-            @Override
-            public void call(SqlBrite.Query query) {
-                queries.getAndIncrement();
-                Log.d(TAG, "Queries: " + queries.get());
-            }
-        });
-        subscriptions.add(s);
+        final Subscription subscription = getAllSkills
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String string) {
+                        onLoadSkills(string);
+                    }
+                });
+
+        subscriptions.add(subscription);
+    }
+
+    private void onLoadSkills(String string) {
+        skillsTextView.setText(string);
     }
 
     @Override

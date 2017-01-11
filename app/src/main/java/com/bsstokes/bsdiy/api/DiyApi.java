@@ -103,13 +103,13 @@ public interface DiyApi {
         public @Nullable String color;
         // "notes": ""
 
+
         @Override
         public String toString() {
             return "Skill{" +
                     "id=" + id +
-                    ", active=" + active +
-                    ", url='" + url + '\'' +
                     ", title='" + title + '\'' +
+                    ", color='" + color + '\'' +
                     '}';
         }
     }
