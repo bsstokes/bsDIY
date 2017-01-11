@@ -4,6 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="avatar">Avatar</string>
     <string name="skills">Skills</string>
     <string name="skill_patch">Skill patch</string>
+
+    <!-- Placeholders -->
+    <string name="user_name_placeholder">Brain Behold</string>
+
 </resources>
