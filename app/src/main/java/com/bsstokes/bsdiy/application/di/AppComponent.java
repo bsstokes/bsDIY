@@ -1,6 +1,7 @@
 package com.bsstokes.bsdiy.application.di;
 
 import com.bsstokes.bsdiy.MainActivity;
+import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.SkillsSyncService;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.explore.ExploreFragment;
@@ -15,6 +16,8 @@ public interface AppComponent {
 
     // Activities
     void inject(MainActivity activity);
+
+    void inject(SkillActivity activity);
 
     // Fragments
     void inject(ExploreFragment fragment);
