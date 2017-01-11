@@ -1,6 +1,9 @@
 package com.bsstokes.bsdiy.api;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -16,6 +19,18 @@ public interface DiyApi {
 
     @GET("/skills?limit=1000&offset=0")
     Observable<Response<DiyResponse<List<Skill>>>> getSkills();
+
+    class Helper {
+        @NonNull
+        public static String normalizeUrl(@NonNull String url) {
+            final Uri uri = Uri.parse(url);
+            if (TextUtils.isEmpty(uri.getScheme())) {
+                return uri.buildUpon().scheme("https").build().toString();
+            } else {
+                return uri.toString();
+            }
+        }
+    }
 
     class DiyResponse<T> {
         Head head = new Head();

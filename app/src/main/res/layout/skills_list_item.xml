@@ -6,15 +6,23 @@
               android:background="?attr/selectableItemBackground"
               android:clickable="true"
               android:focusable="true"
-              android:gravity="center_vertical"
+              android:gravity="center"
               android:orientation="vertical"
               android:padding="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/skill_patch_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:minHeight="100dp"
+        android:minWidth="100dp"/>
 
     <TextView
         android:id="@+id/skill_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center"
         tools:text="Skill"/>
 
 </LinearLayout>

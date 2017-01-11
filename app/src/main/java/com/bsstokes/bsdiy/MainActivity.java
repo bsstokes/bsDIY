@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
 
     @Inject BsDiyDatabase database;
     @Inject DiyApi diyApi;
+    @Inject Picasso picasso;
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private SkillsAdapter skillsAdapter;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity
         BsDiyApplication.getApplication(this).appComponent().inject(this);
         Preconditions.checkNotNull(database);
         Preconditions.checkNotNull(diyApi);
+        Preconditions.checkNotNull(picasso);
 
         setSupportActionBar(toolbar);
 
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        skillsAdapter = new SkillsAdapter(this);
+        skillsAdapter = new SkillsAdapter(this, picasso);
         skillsListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         skillsListRecyclerView.setAdapter(skillsAdapter);
     }

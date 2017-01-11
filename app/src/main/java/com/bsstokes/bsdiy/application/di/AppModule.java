@@ -1,6 +1,7 @@
 package com.bsstokes.bsdiy.application.di;
 
 import com.bsstokes.bsdiy.application.BsDiyApplication;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
 
@@ -20,5 +21,11 @@ class AppModule {
     @Singleton
     BsDiyApplication provideApplication() {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    Picasso providePicasso() {
+        return Picasso.with(application);
     }
 }
