@@ -16,6 +16,11 @@ public class SkillMapper implements Func1<Cursor, DiyApi.Skill> {
         skill.url = Db.getString(cursor, "url");
         skill.title = Db.getString(cursor, "title");
         skill.description = Db.getString(cursor, "description");
+        skill.images = new DiyApi.Skill.Images(
+                Db.getString(cursor, "image_small"),
+                Db.getString(cursor, "image_medium"),
+                Db.getString(cursor, "image_large")
+        );
         skill.color = Db.getString(cursor, "color");
         return skill;
     }

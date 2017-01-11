@@ -88,11 +88,7 @@ public interface DiyApi {
         //   "small":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_small.png",
         //   "medium":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_medium.png"
         // },
-        // "images": {
-        //   "small":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_small.png",
-        //   "medium":"//d1973c4qjhao9m.cloudfront.net/patches/actor_medium.png",
-        //   "large":"//d1973c4qjhao9m.cloudfront.net/patches/actor_large.png"
-        // },
+        public @Nullable Images images = new Images("", "", "");
         // "grammar": {
         //   "singular":"actor",
         //   "plural":"Actor",
@@ -103,6 +99,17 @@ public interface DiyApi {
         public @Nullable String color;
         // "notes": ""
 
+        public static class Images {
+            public Images(@Nullable String small, @Nullable String medium, @Nullable String large) {
+                this.small = small;
+                this.medium = medium;
+                this.large = large;
+            }
+
+            public @Nullable String small = "";
+            public @Nullable String medium = "";
+            public @Nullable String large = "";
+        }
 
         @Override
         public String toString() {

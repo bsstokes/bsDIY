@@ -42,6 +42,14 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
         contentValues.put("title", skill.title);
         contentValues.put("description", skill.description);
         contentValues.put("color", skill.color);
+
+        final DiyApi.Skill.Images images = skill.images;
+        if (null != images) {
+            contentValues.put("image_small", images.small);
+            contentValues.put("image_medium", images.medium);
+            contentValues.put("image_large", images.large);
+        }
+
         return contentValues;
     }
 }

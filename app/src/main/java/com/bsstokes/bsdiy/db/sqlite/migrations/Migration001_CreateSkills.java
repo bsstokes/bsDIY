@@ -13,6 +13,9 @@ public class Migration001_CreateSkills implements Migration {
                 + "`url` VARCHAR, "
                 + "`title` VARCHAR, "
                 + "`description` VARCHAR, "
+                + "`image_small` VARCHAR, "
+                + "`image_medium` VARCHAR, "
+                + "`image_large` VARCHAR, "
                 + "`color` VARCHAR"
                 + ");";
         database.execSQL(CREATE_SKILLS);
