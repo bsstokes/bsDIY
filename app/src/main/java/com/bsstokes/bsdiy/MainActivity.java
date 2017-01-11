@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private SkillsAdapter skillsAdapter;
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,12 +128,26 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         final int itemId = item.getItemId();
 
-        if (itemId == R.id.nav_skills) {
+        if (R.id.nav_messages == itemId) {
+            showSnackbar(item.getTitle());
+        } else if (R.id.nav_to_dos == itemId) {
+            showSnackbar(item.getTitle());
+        } else if (R.id.nav_skills == itemId) {
             downloadSkills();
+        } else if (R.id.nav_stream == itemId) {
+            showSnackbar(item.getTitle());
+        } else if (R.id.nav_explore == itemId) {
+            showSnackbar(item.getTitle());
+        } else {
+            Log.e(TAG, "Unknown navigation item selected");
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showSnackbar(@NonNull CharSequence text) {
+        Snackbar.make(skillsListRecyclerView, text, Snackbar.LENGTH_LONG).show();
     }
 
     private void downloadSkills() {
