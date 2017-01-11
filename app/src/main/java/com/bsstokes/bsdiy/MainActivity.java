@@ -34,7 +34,6 @@ import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -83,37 +82,23 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        final Observable<String> getAllSkills = database.getAllSkills()
+        final Observable<List<DiyApi.Skill>> getAllSkills = database.getAllSkills()
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<List<DiyApi.Skill>, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(List<DiyApi.Skill> skills) {
-                        if (null == skills) {
-                            return Observable.just("");
-                        } else {
-                            final StringBuilder stringBuilder = new StringBuilder();
-                            for (final DiyApi.Skill skill : skills) {
-                                stringBuilder.append(skill.toString());
-                                stringBuilder.append("\n");
-                            }
-                            return Observable.just(stringBuilder.toString());
-                        }
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread());
 
         final Subscription subscription = getAllSkills
-                .subscribe(new Action1<String>() {
+                .subscribe(new Action1<List<DiyApi.Skill>>() {
                     @Override
-                    public void call(String string) {
-                        onLoadSkills(string);
+                    public void call(List<DiyApi.Skill> skills) {
+                        onLoadSkills(skills);
                     }
                 });
 
         subscriptions.add(subscription);
     }
 
-    private void onLoadSkills(String string) {
+    private void onLoadSkills(List<DiyApi.Skill> skills) {
+        skillsAdapter.loadSkills(skills);
     }
 
     @Override
