@@ -11,10 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
@@ -29,9 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.internal.Preconditions;
-import retrofit2.Response;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -45,7 +41,6 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
 
-    @BindView(R.id.diy_info_text_view) TextView diyInfoTextView;
     @BindView(R.id.skills_list) RecyclerView skillsListRecyclerView;
 
     @Inject BsDiyDatabase database;
@@ -129,9 +124,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         final int itemId = item.getItemId();
 
-        if (itemId == R.id.nav_diy_info) {
-            downloadSomething();
-        } else if (itemId == R.id.nav_skills) {
+        if (itemId == R.id.nav_skills) {
             downloadSkills();
         }
 
@@ -139,46 +132,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void downloadSomething() {
-        diyApi.getApiInfo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<DiyApi.DiyResponse<DiyApi.DiyInfo>>>() {
-                    private static final String TAG = "DiyApi getApiInfo";
-
-                    @Override
-                    public void onNext(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
-                        displayResponse(response);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError", e);
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted");
-                    }
-                });
-    }
-
-    private void displayResponse(Response<DiyApi.DiyResponse<DiyApi.DiyInfo>> response) {
-        if (null != response) {
-            if (null != response.body()) {
-                displayResponse(response.body());
-            }
-        }
-    }
-
-    private void displayResponse(DiyApi.DiyResponse<DiyApi.DiyInfo> diyResponse) {
-        if (null != diyResponse && null != diyResponse.response) {
-            diyInfoTextView.setText(diyResponse.response.toString());
-        }
-    }
-
     private void downloadSkills() {
         SkillsSyncService.startActionSyncSkills(this);
     }
-
 }
