@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper;
 import com.squareup.sqlbrite.BriteDatabase;
 
 import java.util.List;

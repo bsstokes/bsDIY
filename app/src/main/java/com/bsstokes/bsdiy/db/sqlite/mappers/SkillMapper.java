@@ -1,8 +1,9 @@
-package com.bsstokes.bsdiy.db.sqlite;
+package com.bsstokes.bsdiy.db.sqlite.mappers;
 
 import android.database.Cursor;
 
 import com.bsstokes.bsdiy.api.DiyApi;
+import com.bsstokes.bsdiy.db.sqlite.Db;
 
 import rx.functions.Func1;
 
