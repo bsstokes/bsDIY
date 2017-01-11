@@ -29,6 +29,13 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
+    public Observable<DiyApi.Skill> getSkill(long skillId) {
+        final String skillIdString = String.valueOf(skillId);
+        return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE _id = ? LIMIT 1", skillIdString)
+                .mapToOne(new SkillMapper());
+    }
+
+    @Override
     public void putSkill(@NonNull DiyApi.Skill skill) {
         briteDatabase.insert("skills", createSkill(skill), CONFLICT_REPLACE);
     }
