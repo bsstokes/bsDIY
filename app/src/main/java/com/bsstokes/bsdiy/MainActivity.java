@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         skillsAdapter = new SkillsAdapter(this, picasso);
         skillsListRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         skillsListRecyclerView.setAdapter(skillsAdapter);
+        skillsListRecyclerView.addItemDecoration(new GridDividerDecoration(this));
     }
 
     @Override
