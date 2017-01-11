@@ -5,10 +5,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="avatar">Avatar</string>
+    <string name="explore">Explore</string>
+    <string name="messages">Messages</string>
     <string name="skills">Skills</string>
     <string name="skill_patch">Skill patch</string>
+    <string name="stream">Stream</string>
+    <string name="to_dos">To-Do&#8217;s</string>
 
     <!-- Placeholders -->
     <string name="user_name_placeholder">Brain Behold</string>
-
 </resources>

@@ -3,7 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_messages"
+            android:title="@string/messages"/>
+        <item
+            android:id="@+id/nav_to_dos"
+            android:title="@string/to_dos"/>
+
+        <item
             android:id="@+id/nav_skills"
             android:title="@string/skills"/>
+        <item
+            android:id="@+id/nav_stream"
+            android:title="@string/stream"/>
+        <item
+            android:id="@+id/nav_explore"
+            android:title="@string/explore"/>
     </group>
 </menu>
