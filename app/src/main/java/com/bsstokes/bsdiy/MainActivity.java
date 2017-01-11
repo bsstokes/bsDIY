@@ -17,8 +17,11 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.squareup.sqlbrite.QueryObservable;
+import com.squareup.sqlbrite.SqlBrite;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
@@ -28,8 +31,11 @@ import butterknife.OnClick;
 import dagger.internal.Preconditions;
 import retrofit2.Response;
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity
 
     @Inject BsDiyDatabase database;
     @Inject DiyApi diyApi;
+
+    private final CompositeSubscription subscriptions = new CompositeSubscription();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,29 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final QueryObservable skills = database.getAllSkills();
+
+        final AtomicInteger queries = new AtomicInteger();
+        Subscription s = skills.subscribe(new Action1<SqlBrite.Query>() {
+            @Override
+            public void call(SqlBrite.Query query) {
+                queries.getAndIncrement();
+                Log.d(TAG, "Queries: " + queries.get());
+            }
+        });
+        subscriptions.add(s);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        subscriptions.clear();
     }
 
     @OnClick(R.id.fab)
@@ -178,6 +209,8 @@ public class MainActivity extends AppCompatActivity
         for (final DiyApi.Skill skill : skills) {
             stringBuilder.append(skill.toString());
             stringBuilder.append("\n");
+
+            database.putSkill(skill);
         }
 
         final String skillsText = stringBuilder.toString();

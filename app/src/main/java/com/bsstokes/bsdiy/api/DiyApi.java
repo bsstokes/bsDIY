@@ -1,5 +1,7 @@
 package com.bsstokes.bsdiy.api;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import retrofit2.Response;
@@ -73,14 +75,14 @@ public interface DiyApi {
     }
 
     class Skill {
-        long id;
+        public long id;
         // "sku":314889437,
         // "stamp":"2014-05-06T22:53:11.000Z",
-        boolean active;
+        public boolean active;
         // "activeAt":null,
-        String url = "";
-        String title = "";
-        // "description": "Actors bring characters to life. We conjure up emotion and laughter with our words and stories. The world is our stage, and we are players in it.",
+        public @Nullable String url = "";
+        public @Nullable String title = "";
+        public @Nullable String description = "";
         // "position": [0, 0],
         // "icons": {
         //   "small":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_small.png",
@@ -98,7 +100,7 @@ public interface DiyApi {
         //   "article":"a"
         // },
         // "pole": "art",
-        // "color": "#005ce0",
+        public @Nullable String color;
         // "notes": ""
 
         @Override
