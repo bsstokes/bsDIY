@@ -20,7 +20,6 @@ import com.bsstokes.bsdiy.db.BsDiyDatabase;
 import com.squareup.sqlbrite.QueryObservable;
 import com.squareup.sqlbrite.SqlBrite;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
@@ -30,10 +29,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.internal.Preconditions;
 import retrofit2.Response;
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -164,56 +165,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void downloadSkills() {
-        diyApi.getSkills()
+        Log.d(TAG, "downloadSkills: thread=" + Thread.currentThread().getName());
+
+        Observable.defer(new Func0<Observable<Boolean>>() {
+            @Override
+            public Observable<Boolean> call() {
+                SkillsDownloader skillsDownloader = new SkillsDownloader(diyApi, database);
+                skillsDownloader.syncSkills();
+                return Observable.just(true);
+            }
+        })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>>() {
-                    private static final String TAG = "DiyApi getSkills";
-
-                    @Override
-                    public void onNext(Response<DiyApi.DiyResponse<List<DiyApi.Skill>>> response) {
-                        onDownloadSkillsResponse(response);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: diyApi getSkills", e);
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted");
-                    }
-                });
-    }
-
-    private void onDownloadSkillsResponse(Response<DiyApi.DiyResponse<List<DiyApi.Skill>>> response) {
-        if (null != response && null != response.body()) {
-            onDownloadSkillsResponse(response.body());
-        }
-    }
-
-    private void onDownloadSkillsResponse(DiyApi.DiyResponse<List<DiyApi.Skill>> skillsResponse) {
-        if (null != skillsResponse && null != skillsResponse.response) {
-            onDownloadSkills(skillsResponse.response);
-        }
+                .subscribe();
     }
 
     private static final String TAG = "MainActivity";
-
-    private void onDownloadSkills(List<DiyApi.Skill> skills) {
-        Log.d(TAG, "onDownloadSkills: Downloaded " + skills.size() + " skills");
-
-        final StringBuilder stringBuilder = new StringBuilder();
-
-        for (final DiyApi.Skill skill : skills) {
-            stringBuilder.append(skill.toString());
-            stringBuilder.append("\n");
-
-            database.putSkill(skill);
-        }
-
-        final String skillsText = stringBuilder.toString();
-        skillsTextView.setText(skillsText);
-    }
 }
