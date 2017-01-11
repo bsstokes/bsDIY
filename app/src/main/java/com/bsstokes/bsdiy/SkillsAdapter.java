@@ -31,6 +31,7 @@ class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
     SkillsAdapter(@NonNull Context context, Picasso picasso) {
         layoutInflater = LayoutInflater.from(context);
         this.picasso = picasso;
+        setHasStableIds(true);
     }
 
     @Override
@@ -56,7 +57,12 @@ class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
         return skills.size();
     }
 
-    public void loadSkills(List<DiyApi.Skill> skills) {
+    @Override
+    public long getItemId(int position) {
+        return getSkill(position).id;
+    }
+
+    void loadSkills(List<DiyApi.Skill> skills) {
         this.skills = skills;
         notifyDataSetChanged();
     }

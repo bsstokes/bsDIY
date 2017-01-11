@@ -24,7 +24,7 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
 
     @Override
     public Observable<List<DiyApi.Skill>> getAllSkills() {
-        return briteDatabase.createQuery("skills", "SELECT * FROM skills")
+        return briteDatabase.createQuery("skills", "SELECT * FROM skills ORDER BY title ASC")
                 .mapToList(new SkillMapper());
     }
 
