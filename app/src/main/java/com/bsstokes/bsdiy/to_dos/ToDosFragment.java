@@ -2,6 +2,8 @@ package com.bsstokes.bsdiy.to_dos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,10 @@ public class ToDosFragment extends Fragment {
     @Inject BsDiyDatabase database;
     @Inject Picasso picasso;
 
+    private final @StringRes int TITLE = R.string.to_dos;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final @LayoutRes int LAYOUT = R.layout.fragment_to_dos;
+
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private Unbinder unbinder;
 
@@ -46,10 +52,10 @@ public class ToDosFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_to_dos, container, false);
+        final View view = inflater.inflate(LAYOUT, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        textView.setText(getString(R.string.to_dos));
+        textView.setText(TITLE);
 
         return view;
     }
@@ -57,6 +63,7 @@ public class ToDosFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        getActivity().setTitle(TITLE);
 
         BsDiyApplication.getApplication(getActivity()).appComponent().inject(this);
         Preconditions.checkNotNull(database);
