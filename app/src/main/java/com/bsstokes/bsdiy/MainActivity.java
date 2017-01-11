@@ -8,48 +8,25 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
-import com.bsstokes.bsdiy.db.BsDiyDatabase;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
-import javax.inject.Inject;
+import com.bsstokes.bsdiy.skills.SkillsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.internal.Preconditions;
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
-
-    @BindView(R.id.skills_list) RecyclerView skillsListRecyclerView;
-
-    @Inject BsDiyDatabase database;
-    @Inject DiyApi diyApi;
-    @Inject Picasso picasso;
-
-    private final CompositeSubscription subscriptions = new CompositeSubscription();
-    private SkillsAdapter skillsAdapter;
+    @BindView(R.id.content_view) View contentView;
 
     private static final String TAG = "MainActivity";
 
@@ -60,9 +37,6 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         BsDiyApplication.getApplication(this).appComponent().inject(this);
-        Preconditions.checkNotNull(database);
-        Preconditions.checkNotNull(diyApi);
-        Preconditions.checkNotNull(picasso);
 
         setSupportActionBar(toolbar);
 
@@ -73,40 +47,11 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        skillsAdapter = new SkillsAdapter(this, picasso);
-        skillsListRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        skillsListRecyclerView.setAdapter(skillsAdapter);
-        skillsListRecyclerView.addItemDecoration(new GridDividerDecoration(this));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        final Observable<List<DiyApi.Skill>> getAllSkills = database.getAllSkills()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-
-        final Subscription subscription = getAllSkills
-                .subscribe(new Action1<List<DiyApi.Skill>>() {
-                    @Override
-                    public void call(List<DiyApi.Skill> skills) {
-                        onLoadSkills(skills);
-                    }
-                });
-
-        subscriptions.add(subscription);
-    }
-
-    private void onLoadSkills(List<DiyApi.Skill> skills) {
-        skillsAdapter.loadSkills(skills);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        subscriptions.clear();
     }
 
     @OnClick(R.id.fab)
@@ -133,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         } else if (R.id.nav_to_dos == itemId) {
             showSnackbar(item.getTitle());
         } else if (R.id.nav_skills == itemId) {
-            downloadSkills();
+            onSkillsNavigationItemSelected();
         } else if (R.id.nav_stream == itemId) {
             showSnackbar(item.getTitle());
         } else if (R.id.nav_explore == itemId) {
@@ -147,10 +92,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showSnackbar(@NonNull CharSequence text) {
-        Snackbar.make(skillsListRecyclerView, text, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(contentView, text, Snackbar.LENGTH_LONG).show();
     }
 
-    private void downloadSkills() {
+    private void onSkillsNavigationItemSelected() {
         SkillsSyncService.startActionSyncSkills(this);
+
+        if (!isFragmentLoaded(SkillsFragment.TAG)) {
+            final SkillsFragment skillsFragment = SkillsFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_view, skillsFragment, SkillsFragment.TAG)
+                    .commit();
+        }
+    }
+
+    private boolean isFragmentLoaded(String tag) {
+        return null != getSupportFragmentManager().findFragmentByTag(tag);
     }
 }

@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy;
+package com.bsstokes.bsdiy.skills;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
+public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
 
     private final LayoutInflater layoutInflater;
     private final Picasso picasso;
