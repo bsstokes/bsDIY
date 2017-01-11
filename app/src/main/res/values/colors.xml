@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">@color/diy_turquoise</color>
 
     <color name="diy_purple_darkest">#1f1f26</color>
     <color name="diy_purple_dark">#2a2933</color>
     <color name="diy_purple_medium">#3f3d4b</color>
     <color name="diy_purple_light">#696584</color>
+    <color name="diy_turquoise">#22d2a4</color>
+    <color name="diy_light_gray">#ebebeb</color>
 </resources>
