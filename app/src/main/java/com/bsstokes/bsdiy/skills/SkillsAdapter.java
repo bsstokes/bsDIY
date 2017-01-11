@@ -20,17 +20,24 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
 
-    private final LayoutInflater layoutInflater;
-    private final Picasso picasso;
+    interface OnClickItemListener {
+        void onClickSkill(long skillId);
+    }
+
+    private final @NonNull LayoutInflater layoutInflater;
+    private final @NonNull Picasso picasso;
+    private final @NonNull OnClickItemListener listener;
 
     private List<DiyApi.Skill> skills = Collections.emptyList();
 
-    SkillsAdapter(@NonNull Context context, Picasso picasso) {
-        layoutInflater = LayoutInflater.from(context);
+    SkillsAdapter(@NonNull Context context, @NonNull Picasso picasso, @NonNull OnClickItemListener listener) {
+        this.layoutInflater = LayoutInflater.from(context);
         this.picasso = picasso;
+        this.listener = listener;
         setHasStableIds(true);
     }
 
@@ -43,6 +50,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final DiyApi.Skill skill = getSkill(position);
+        holder.bindSkill(skill);
         holder.skillTitleTextView.setText(skill.title);
 
         final String imageUrl = chooseImage(skill);
@@ -70,13 +78,24 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         return skills.get(position);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.skill_title_text_view) TextView skillTitleTextView;
         @BindView(R.id.skill_patch_image_view) ImageView skillPatchImageView;
+
+        private long skillId = 0;
 
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        void bindSkill(@NonNull DiyApi.Skill skill) {
+            skillId = skill.id;
+        }
+
+        @OnClick
+        void onClick() {
+            listener.onClickSkill(skillId);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bsstokes.bsdiy.skills;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.bsstokes.bsdiy.GridDividerDecoration;
 import com.bsstokes.bsdiy.R;
+import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
@@ -33,7 +35,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class SkillsFragment extends Fragment {
+public class SkillsFragment extends Fragment implements SkillsAdapter.OnClickItemListener {
 
     public static final String TAG = "SkillsFragment";
 
@@ -68,7 +70,7 @@ public class SkillsFragment extends Fragment {
         final View view = inflater.inflate(LAYOUT, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        skillsAdapter = new SkillsAdapter(getContext(), picasso);
+        skillsAdapter = new SkillsAdapter(getContext(), picasso, this);
         skillsListRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         skillsListRecyclerView.setAdapter(skillsAdapter);
         skillsListRecyclerView.addItemDecoration(new GridDividerDecoration(getContext()));
@@ -115,5 +117,11 @@ public class SkillsFragment extends Fragment {
     public void onPause() {
         super.onPause();
         subscriptions.clear();
+    }
+
+    @Override
+    public void onClickSkill(long skillId) {
+        final Intent intent = SkillActivity.createIntent(getActivity(), skillId);
+        startActivity(intent);
     }
 }
