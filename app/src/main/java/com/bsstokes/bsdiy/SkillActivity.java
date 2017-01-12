@@ -58,6 +58,8 @@ public class SkillActivity extends AppCompatActivity {
         if (null != getIntent()) {
             skillId = getIntent().getLongExtra(EXTRA_SKILL_ID, skillId);
         }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
