@@ -100,10 +100,6 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
-    private void showSnackbar(@NonNull CharSequence text) {
-        Snackbar.make(contentView, text, Snackbar.LENGTH_LONG).show();
-    }
-
     private void onSkillsNavigationItemSelected() {
         if (!isFragmentLoaded(SkillsFragment.TAG)) {
             loadFragment(SkillsFragment.newInstance(), SkillsFragment.TAG);
