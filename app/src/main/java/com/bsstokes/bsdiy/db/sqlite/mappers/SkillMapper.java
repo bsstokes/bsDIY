@@ -1,6 +1,8 @@
 package com.bsstokes.bsdiy.db.sqlite.mappers;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.sqlite.Db;
@@ -24,6 +26,37 @@ public interface SkillMapper {
             );
             skill.color = Db.getString(cursor, "color");
             return skill;
+        }
+    }
+
+    class SkillToContentValues implements Func1<DiyApi.Skill, ContentValues> {
+
+        private static SkillToContentValues INSTANCE = new SkillToContentValues();
+
+        @NonNull
+        public static ContentValues createSkill(@NonNull DiyApi.Skill skill) {
+            return INSTANCE.call(skill);
+        }
+
+        @NonNull
+        @Override
+        public ContentValues call(@NonNull DiyApi.Skill skill) {
+            final ContentValues contentValues = new ContentValues();
+            contentValues.put("_id", skill.id);
+            contentValues.put("active", skill.active);
+            contentValues.put("url", skill.url);
+            contentValues.put("title", skill.title);
+            contentValues.put("description", skill.description);
+            contentValues.put("color", skill.color);
+
+            final DiyApi.Skill.Images images = skill.images;
+            if (null != images) {
+                contentValues.put("image_small", images.small);
+                contentValues.put("image_medium", images.medium);
+                contentValues.put("image_large", images.large);
+            }
+
+            return contentValues;
         }
     }
 }

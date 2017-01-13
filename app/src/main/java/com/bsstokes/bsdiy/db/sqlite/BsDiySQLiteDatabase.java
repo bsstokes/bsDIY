@@ -1,6 +1,5 @@
 package com.bsstokes.bsdiy.db.sqlite;
 
-import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
@@ -13,6 +12,7 @@ import java.util.List;
 import rx.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
+import static com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper.SkillToContentValues.createSkill;
 
 public class BsDiySQLiteDatabase implements BsDiyDatabase {
 
@@ -25,14 +25,14 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     @Override
     public Observable<List<DiyApi.Skill>> getAllSkills() {
         return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE active=1 ORDER BY priority DESC, title ASC")
-                .mapToList(new SkillMapper());
+                .mapToList(new SkillMapper.CursorToSkill());
     }
 
     @Override
     public Observable<DiyApi.Skill> getSkill(long skillId) {
         final String skillIdString = String.valueOf(skillId);
         return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE _id = ? LIMIT 1", skillIdString)
-                .mapToOne(new SkillMapper());
+                .mapToOne(new SkillMapper.CursorToSkill());
     }
 
     @Override
@@ -51,25 +51,5 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
         } finally {
             transaction.end();
         }
-    }
-
-    @NonNull
-    private ContentValues createSkill(@NonNull DiyApi.Skill skill) {
-        final ContentValues contentValues = new ContentValues();
-        contentValues.put("_id", skill.id);
-        contentValues.put("active", skill.active);
-        contentValues.put("url", skill.url);
-        contentValues.put("title", skill.title);
-        contentValues.put("description", skill.description);
-        contentValues.put("color", skill.color);
-
-        final DiyApi.Skill.Images images = skill.images;
-        if (null != images) {
-            contentValues.put("image_small", images.small);
-            contentValues.put("image_medium", images.medium);
-            contentValues.put("image_large", images.large);
-        }
-
-        return contentValues;
     }
 }
