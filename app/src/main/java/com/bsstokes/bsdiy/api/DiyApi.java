@@ -93,7 +93,7 @@ public interface DiyApi {
         public long id;
         // "sku":314889437,
         // "stamp":"2014-05-06T22:53:11.000Z",
-        public boolean active;
+        public boolean active = true;
         // "activeAt":null,
         public @Nullable String url = "";
         public @Nullable String title = "";
