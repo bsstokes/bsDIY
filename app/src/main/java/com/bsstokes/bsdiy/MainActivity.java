@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (null == getSupportFragmentManager().getFragments()) {
+            onSkillsNavigationItemSelected();
+        }
     }
 
     @OnClick(R.id.fab)
