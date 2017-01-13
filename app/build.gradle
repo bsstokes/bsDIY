@@ -1,14 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
+def versionMajor = 0
+def versionMinor = 9
+def versionPatch = 0
+def versionBuild = 1
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}" + (0 != versionBuild ? ".${versionBuild}" : "")
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
