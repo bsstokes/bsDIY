@@ -17,6 +17,7 @@ import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.ui.GridDividerDecoration;
 import com.squareup.picasso.Picasso;
 
@@ -81,6 +82,7 @@ public class SkillsFragment extends Fragment implements SkillsAdapter.OnClickIte
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        ApiSyncService.syncSkills(getActivity());
         getActivity().setTitle(TITLE);
 
         BsDiyApplication.getApplication(getActivity()).appComponent().inject(this);

@@ -19,7 +19,6 @@ import com.bsstokes.bsdiy.explore.ExploreFragment;
 import com.bsstokes.bsdiy.messages.MessagesFragment;
 import com.bsstokes.bsdiy.skills.SkillsFragment;
 import com.bsstokes.bsdiy.stream.StreamFragment;
-import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.to_dos.ToDosFragment;
 
 import butterknife.BindView;
@@ -106,8 +105,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void onSkillsNavigationItemSelected() {
-        ApiSyncService.syncSkills(this);
-
         if (!isFragmentLoaded(SkillsFragment.TAG)) {
             loadFragment(SkillsFragment.newInstance(), SkillsFragment.TAG);
         }
