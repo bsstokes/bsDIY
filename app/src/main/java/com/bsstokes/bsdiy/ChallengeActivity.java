@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.ui.ActionBarHelper;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -64,7 +65,7 @@ public class ChallengeActivity extends AppCompatActivity {
             challengeId = getIntent().getLongExtra(EXTRA_CHALLENGE_ID, challengeId);
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBarHelper.setDisplayShowHomeEnabled(this);
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
 import com.bsstokes.bsdiy.sync.ApiSyncService;
+import com.bsstokes.bsdiy.ui.ActionBarHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -66,7 +67,7 @@ public class SkillActivity extends AppCompatActivity {
             skillId = getIntent().getLongExtra(EXTRA_SKILL_ID, skillId);
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBarHelper.setDisplayShowHomeEnabled(this);
     }
 
     @Override
