@@ -9,16 +9,17 @@ import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public interface DiyApi {
     String ENDPOINT = "https://api.diy.org/";
 
-    @GET("/")
-    Observable<Response<DiyResponse<DiyInfo>>> getApiInfo();
-
     @GET("/skills?limit=1000&offset=0")
     Observable<Response<DiyResponse<List<Skill>>>> getSkills();
+
+    @GET("/skills/{skill_url}/challenges")
+    Observable<Response<DiyResponse<List<Challenge>>>> getChallenges(@Path("skill_url") String skillUrl);
 
     class Helper {
         @NonNull
@@ -74,21 +75,6 @@ public interface DiyApi {
         }
     }
 
-    class DiyInfo {
-        String docs = "";
-        String help = "";
-        String twitter = "";
-
-        @Override
-        public String toString() {
-            return "DiyInfo{" +
-                    "docs='" + docs + '\'' +
-                    ", help='" + help + '\'' +
-                    ", twitter='" + twitter + '\'' +
-                    '}';
-        }
-    }
-
     class Skill {
         public long id;
         // "sku":314889437,
@@ -134,5 +120,24 @@ public interface DiyApi {
                     ", color='" + color + '\'' +
                     '}';
         }
+    }
+
+    class Challenge {
+        public long id;
+        public boolean active = true;
+        public @Nullable String title;
+        public @Nullable String description;
+        public @Nullable Image image = new Image();
+
+        public static class Image {
+            public @Nullable Asset ios_600;
+        }
+    }
+
+    class Asset {
+        public @Nullable String url;
+        public @Nullable String mime;
+        public int width;
+        public int height;
     }
 }
