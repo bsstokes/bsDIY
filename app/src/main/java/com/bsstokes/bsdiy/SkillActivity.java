@@ -51,8 +51,6 @@ public class SkillActivity extends AppCompatActivity {
     private long skillId = 0;
     private final CompositeSubscription subscriptions = new CompositeSubscription();
 
-    private static final String TAG = "SkillActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +102,12 @@ public class SkillActivity extends AppCompatActivity {
     }
 
     private void onLoadSkill(DiyApi.Skill skill) {
-        if (null != skill && null != skill.url) {
+        if (null == skill) {
+            // TODO: Handle missing skill better
+            return;
+        }
+
+        if (null != skill.url) {
             // TODO: Not the best place to put this because it might be firing
             // too often.
             ApiSyncService.syncChallenges(this, skill.url);
@@ -112,8 +115,10 @@ public class SkillActivity extends AppCompatActivity {
 
         setTitle(skill.title);
 
-        final String imageUrl = DiyApi.Helper.normalizeUrl(skill.images.large);
-        picasso.load(imageUrl).into(patchImageView);
+        if (null != skill.images && null != skill.images.large) {
+            final String imageUrl = DiyApi.Helper.normalizeUrl(skill.images.large);
+            picasso.load(imageUrl).into(patchImageView);
+        }
 
         descriptionTextView.setText(skill.description);
     }
