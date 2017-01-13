@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="avatar">Avatar</string>
+    <string name="challenges">Challenges</string>
     <string name="explore">Explore</string>
     <string name="messages">Messages</string>
     <string name="skills">Skills</string>
