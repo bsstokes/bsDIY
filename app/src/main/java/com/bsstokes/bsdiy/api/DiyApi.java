@@ -85,10 +85,7 @@ public interface DiyApi {
         public @Nullable String title = "";
         public @Nullable String description = "";
         // "position": [0, 0],
-        // "icons": {
-        //   "small":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_small.png",
-        //   "medium":"//d1973c4qjhao9m.cloudfront.net/patches/actor_icon_medium.png"
-        // },
+        public @Nullable Icons icons = new Icons();
         public @Nullable Images images = new Images("", "", "");
         // "grammar": {
         //   "singular":"actor",
@@ -99,6 +96,11 @@ public interface DiyApi {
         // "pole": "art",
         public @Nullable String color;
         // "notes": ""
+
+        public static class Icons {
+            public @Nullable String small;
+            public @Nullable String medium;
+        }
 
         public static class Images {
             public Images(@Nullable String small, @Nullable String medium, @Nullable String large) {

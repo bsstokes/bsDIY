@@ -19,6 +19,9 @@ public interface SkillMapper {
             skill.url = Db.getString(cursor, "url");
             skill.title = Db.getString(cursor, "title");
             skill.description = Db.getString(cursor, "description");
+            skill.icons = new DiyApi.Skill.Icons();
+            skill.icons.small = Db.getString(cursor, "icon_small");
+            skill.icons.medium = Db.getString(cursor, "icon_medium");
             skill.images = new DiyApi.Skill.Images(
                     Db.getString(cursor, "image_small"),
                     Db.getString(cursor, "image_medium"),
@@ -48,6 +51,12 @@ public interface SkillMapper {
             contentValues.put("title", skill.title);
             contentValues.put("description", skill.description);
             contentValues.put("color", skill.color);
+
+            final DiyApi.Skill.Icons icons = skill.icons;
+            if (null != icons) {
+                contentValues.put("icon_small", icons.small);
+                contentValues.put("icon_medium", icons.medium);
+            }
 
             final DiyApi.Skill.Images images = skill.images;
             if (null != images) {

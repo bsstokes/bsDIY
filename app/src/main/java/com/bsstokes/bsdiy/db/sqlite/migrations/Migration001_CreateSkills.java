@@ -16,6 +16,8 @@ public class Migration001_CreateSkills implements Migration {
                 + "`image_small` VARCHAR, "
                 + "`image_medium` VARCHAR, "
                 + "`image_large` VARCHAR, "
+                + "`icon_small` VARCHAR, "
+                + "`icon_medium` VARCHAR, "
                 + "`color` VARCHAR, "
                 + "`priority` INTEGER"
                 + ");";
