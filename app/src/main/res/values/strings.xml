@@ -19,6 +19,7 @@
 
     <!-- Empty states -->
     <string name="no_messages">No messages yet!</string>
+    <string name="no_stream">No stream yet!</string>
     <string name="no_to_dos">No to-do&#8217;s yet!</string>
 
     <!-- Placeholders -->

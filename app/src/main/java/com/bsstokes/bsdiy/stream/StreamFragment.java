@@ -32,9 +32,10 @@ public class StreamFragment extends Fragment {
     @Inject BsDiyDatabase database;
     @Inject Picasso picasso;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final @StringRes int TITLE = R.string.stream;
-    @SuppressWarnings("FieldCanBeLocal") private final @LayoutRes
-    int LAYOUT = R.layout.fragment_stream;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final @LayoutRes int LAYOUT = R.layout.fragment_stream;
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private Unbinder unbinder;
@@ -55,7 +56,7 @@ public class StreamFragment extends Fragment {
         final View view = inflater.inflate(LAYOUT, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        textView.setText(TITLE);
+        textView.setText(R.string.no_stream);
 
         return view;
     }
