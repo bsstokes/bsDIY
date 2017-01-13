@@ -12,12 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bsstokes.bsdiy.GridDividerDecoration;
 import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.ui.GridDividerDecoration;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
