@@ -32,9 +32,10 @@ public class MessagesFragment extends Fragment {
     @Inject BsDiyDatabase database;
     @Inject Picasso picasso;
 
-    private final @StringRes int TITLE = R.string.messages;
     @SuppressWarnings("FieldCanBeLocal")
-    private final @LayoutRes int LAYOUT = R.layout.fragment_messages;
+    private final @StringRes int TITLE = R.string.messages;
+    @SuppressWarnings("FieldCanBeLocal") private final @LayoutRes
+    int LAYOUT = R.layout.fragment_messages;
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private Unbinder unbinder;
@@ -55,7 +56,7 @@ public class MessagesFragment extends Fragment {
         final View view = inflater.inflate(LAYOUT, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        textView.setText(TITLE);
+        textView.setText(R.string.no_messages);
 
         return view;
     }
