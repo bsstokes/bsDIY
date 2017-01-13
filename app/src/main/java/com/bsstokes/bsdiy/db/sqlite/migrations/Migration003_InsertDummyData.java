@@ -19,6 +19,9 @@ public class Migration003_InsertDummyData implements Migration {
         skill.description = "Good people are hard to find. Brian's a good one. Get to know him, and see if you'd like him to be a part of your team. I know you will.";
         skill.active = true;
         skill.images = new DiyApi.Skill.Images("", "", "http://bsdyi.s3.amazonaws.com/brian_patch.png");
+        skill.icons = new DiyApi.Skill.Icons();
+        skill.icons.small = "https://d1973c4qjhao9m.cloudfront.net/patches/maker_icon.png";
+        skill.icons.medium = "https://d1973c4qjhao9m.cloudfront.net/patches/maker_160x172.png";
 
         final ContentValues contentValues = createSkill(skill);
         contentValues.put("priority", 10);

@@ -150,6 +150,6 @@ public class SkillActivity extends AppCompatActivity {
     }
 
     private void onClickChallenge(long challengeId) {
-        startActivity(ChallengeActivity.createIntent(this, challengeId));
+        startActivity(ChallengeActivity.createIntent(this, skillId, challengeId));
     }
 }
