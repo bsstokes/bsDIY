@@ -12,6 +12,7 @@ import java.util.List;
 import rx.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
+import static com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper.ChallengeToContentValues.createChallenge;
 import static com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper.SkillToContentValues.createSkill;
 
 public class BsDiySQLiteDatabase implements BsDiyDatabase {
@@ -32,7 +33,13 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     public Observable<DiyApi.Skill> getSkill(long skillId) {
         final String skillIdString = String.valueOf(skillId);
         return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE _id = ? LIMIT 1", skillIdString)
-                .mapToOne(new SkillMapper.CursorToSkill());
+                .mapToOneOrDefault(new SkillMapper.CursorToSkill(), null);
+    }
+
+    @Override
+    public Observable<DiyApi.Skill> getSkillByUrl(@NonNull String skillUrl) {
+        return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE url = ? LIMIT 1", skillUrl)
+                .mapToOneOrDefault(new SkillMapper.CursorToSkill(), null);
     }
 
     @Override
@@ -46,6 +53,24 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
         try {
             for (final DiyApi.Skill skill : skills) {
                 putSkill(skill);
+            }
+            transaction.markSuccessful();
+        } finally {
+            transaction.end();
+        }
+    }
+
+    @Override
+    public void putChallenge(DiyApi.Challenge challenge, long skillId) {
+        briteDatabase.insert("challenges", createChallenge(challenge, skillId), CONFLICT_REPLACE);
+    }
+
+    @Override
+    public void putChallenges(List<DiyApi.Challenge> challenges, long skillId) {
+        final BriteDatabase.Transaction transaction = briteDatabase.newTransaction();
+        try {
+            for (final DiyApi.Challenge challenge : challenges) {
+                putChallenge(challenge, skillId);
             }
             transaction.markSuccessful();
         } finally {
