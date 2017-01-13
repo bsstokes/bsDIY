@@ -18,7 +18,7 @@ public class Migration003_InsertDummyData implements Migration {
         skill.title = "Hire a Brian";
         skill.description = "Good people are hard to find. Brian's a good one. Get to know him, and see if you'd like him to be a part of your team. I know you will.";
         skill.active = true;
-        skill.images = new DiyApi.Skill.Images("", "", "http://bsdyi.s3.amazonaws.com/brian_patch.png");
+        skill.images = new DiyApi.Skill.Images("", "", "https://bsdyi.s3.amazonaws.com/brian_patch.png");
         skill.icons = new DiyApi.Skill.Icons();
         skill.icons.small = "https://d1973c4qjhao9m.cloudfront.net/patches/maker_icon.png";
         skill.icons.medium = "https://d1973c4qjhao9m.cloudfront.net/patches/maker_160x172.png";
@@ -34,7 +34,7 @@ public class Migration003_InsertDummyData implements Migration {
         challenge1.description = "Who's this Brian guy and what does he want? Put together clues by looking over his resume, website and anything else you can find about him.";
         challenge1.image = new DiyApi.Challenge.Image();
         challenge1.image.ios_600 = new DiyApi.Asset();
-        challenge1.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/research.jpg";
+        challenge1.image.ios_600.url = "https://bsdyi.s3.amazonaws.com/research.jpg";
         challenge1.image.ios_600.mime = "image/jpeg";
         challenge1.image.ios_600.width = 600;
         challenge1.image.ios_600.height = 400;
@@ -47,7 +47,7 @@ public class Migration003_InsertDummyData implements Migration {
         challenge2.description = "Now you're armed with a little bit of information, you're ready to make contact. Let everybody put Brian through the wringer to figure him out.";
         challenge2.image = new DiyApi.Challenge.Image();
         challenge2.image.ios_600 = new DiyApi.Asset();
-        challenge2.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/interview.jpg";
+        challenge2.image.ios_600.url = "https://bsdyi.s3.amazonaws.com/interview.jpg";
         challenge2.image.ios_600.mime = "image/jpeg";
         challenge2.image.ios_600.width = 600;
         challenge2.image.ios_600.height = 400;
@@ -60,7 +60,7 @@ public class Migration003_InsertDummyData implements Migration {
         challenge3.description = "You love this guy! You just gotta have him on your team. Make him a generous offer, and you'll be on your way to making it a reality.";
         challenge3.image = new DiyApi.Challenge.Image();
         challenge3.image.ios_600 = new DiyApi.Asset();
-        challenge3.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/offer.jpg";
+        challenge3.image.ios_600.url = "https://bsdyi.s3.amazonaws.com/offer.jpg";
         challenge3.image.ios_600.mime = "image/jpeg";
         challenge3.image.ios_600.width = 600;
         challenge3.image.ios_600.height = 400;
@@ -73,7 +73,7 @@ public class Migration003_InsertDummyData implements Migration {
         challenge4.description = "Everybody's on the same page. We just have to make official. Let's get all the paperwork mumbo jumbo out of the way.";
         challenge4.image = new DiyApi.Challenge.Image();
         challenge4.image.ios_600 = new DiyApi.Asset();
-        challenge4.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/handshake.jpg";
+        challenge4.image.ios_600.url = "https://bsdyi.s3.amazonaws.com/handshake.jpg";
         challenge4.image.ios_600.mime = "image/jpeg";
         challenge4.image.ios_600.width = 600;
         challenge4.image.ios_600.height = 400;
@@ -86,7 +86,7 @@ public class Migration003_InsertDummyData implements Migration {
         challenge5.description = "Congratulations. We have a lot of work to do, and let's get to it!";
         challenge5.image = new DiyApi.Challenge.Image();
         challenge5.image.ios_600 = new DiyApi.Asset();
-        challenge5.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/work.jpg";
+        challenge5.image.ios_600.url = "https://bsdyi.s3.amazonaws.com/work.jpg";
         challenge5.image.ios_600.mime = "image/jpeg";
         challenge5.image.ios_600.width = 600;
         challenge5.image.ios_600.height = 400;
