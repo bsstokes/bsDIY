@@ -1,8 +1,8 @@
 package com.bsstokes.bsdiy.application.di;
 
+import com.bsstokes.bsdiy.ApiSyncService;
 import com.bsstokes.bsdiy.MainActivity;
 import com.bsstokes.bsdiy.SkillActivity;
-import com.bsstokes.bsdiy.SkillsSyncService;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.explore.ExploreFragment;
 import com.bsstokes.bsdiy.messages.MessagesFragment;
@@ -31,5 +31,5 @@ public interface AppComponent {
     void inject(ToDosFragment fragment);
 
     // Services
-    void inject(SkillsSyncService service);
+    void inject(ApiSyncService service);
 }

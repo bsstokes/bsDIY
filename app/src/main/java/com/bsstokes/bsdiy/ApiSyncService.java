@@ -14,16 +14,16 @@ import javax.inject.Inject;
 
 import dagger.internal.Preconditions;
 
-public class SkillsSyncService extends IntentService {
+public class ApiSyncService extends IntentService {
 
-    public static void startActionSyncSkills(@NonNull Context context) {
-        final Intent intent = new Intent(context, SkillsSyncService.class);
+    public static void syncSkills(@NonNull Context context) {
+        final Intent intent = new Intent(context, ApiSyncService.class);
         intent.setAction(ACTION_SYNC_SKILLS);
         context.startService(intent);
     }
 
-    public static void startActionSyncChallenges(@NonNull Context context, @NonNull String skillUrl) {
-        final Intent intent = new Intent(context, SkillsSyncService.class);
+    public static void syncChallenges(@NonNull Context context, @NonNull String skillUrl) {
+        final Intent intent = new Intent(context, ApiSyncService.class);
         intent.setAction(ACTION_SYNC_CHALLENGES);
         intent.putExtra(EXTRA_SKILL_URL, skillUrl);
         context.startService(intent);
@@ -37,8 +37,8 @@ public class SkillsSyncService extends IntentService {
     @Inject DiyApi diyApi;
     @Inject BsDiyDatabase database;
 
-    public SkillsSyncService() {
-        super("SkillsSyncService");
+    public ApiSyncService() {
+        super("ApiSyncService");
     }
 
     @Override

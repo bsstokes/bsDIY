@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void onSkillsNavigationItemSelected() {
-        SkillsSyncService.startActionSyncSkills(this);
+        ApiSyncService.syncSkills(this);
 
         if (!isFragmentLoaded(SkillsFragment.TAG)) {
             loadFragment(SkillsFragment.newInstance(), SkillsFragment.TAG);
