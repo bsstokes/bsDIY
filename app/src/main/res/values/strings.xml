@@ -18,6 +18,7 @@
     <string name="post_a_project">Post A Project</string>
 
     <!-- Empty states -->
+    <string name="no_explore">Nothing to explore yet!</string>
     <string name="no_messages">No messages yet!</string>
     <string name="no_stream">No stream yet!</string>
     <string name="no_to_dos">No to-do&#8217;s yet!</string>
