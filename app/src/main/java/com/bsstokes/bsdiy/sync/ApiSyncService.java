@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy;
+package com.bsstokes.bsdiy.sync;
 
 import android.app.IntentService;
 import android.content.Context;

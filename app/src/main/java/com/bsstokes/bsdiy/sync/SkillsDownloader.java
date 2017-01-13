@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy;
+package com.bsstokes.bsdiy.sync;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

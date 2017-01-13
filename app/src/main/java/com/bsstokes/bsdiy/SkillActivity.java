@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;

@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.ApiSyncService;
+import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.MainActivity;
 import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.application.BsDiyApplication;

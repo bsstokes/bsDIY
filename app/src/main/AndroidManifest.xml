@@ -29,7 +29,7 @@
             android:parentActivityName=".MainActivity"/>
 
         <service
-            android:name=".ApiSyncService"
+            android:name=".sync.ApiSyncService"
             android:exported="false"/>
 
         <meta-data
