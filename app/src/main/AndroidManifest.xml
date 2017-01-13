@@ -25,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ChallengeActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".SkillActivity"
             android:parentActivityName=".MainActivity"/>
 

@@ -69,6 +69,13 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
+    public Observable<DiyApi.Challenge> getChallenge(long challengeId) {
+        final String challengeIdString = String.valueOf(challengeId);
+        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE _id = ? LIMIT 1", challengeIdString)
+                .mapToOneOrDefault(new ChallengeMapper.CursorToChallenge(), null);
+    }
+
+    @Override
     public void putChallenge(DiyApi.Challenge challenge, long skillId, int position) {
         briteDatabase.insert("challenges", createChallenge(challenge, skillId, position), CONFLICT_REPLACE);
     }
