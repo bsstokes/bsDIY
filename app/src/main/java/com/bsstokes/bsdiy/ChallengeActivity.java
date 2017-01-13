@@ -111,4 +111,10 @@ public class ChallengeActivity extends AppCompatActivity {
         titleTextView.setText(challenge.title);
         descriptionTextView.setText(challenge.description);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
