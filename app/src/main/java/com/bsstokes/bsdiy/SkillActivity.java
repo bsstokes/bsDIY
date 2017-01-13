@@ -124,7 +124,7 @@ public class SkillActivity extends AppCompatActivity {
         }
     }
 
-    private void onLoadChallenge(DiyApi.Challenge challenge) {
+    private void onLoadChallenge(final DiyApi.Challenge challenge) {
         if (null == challenge) {
             return;
         }
@@ -139,6 +139,17 @@ public class SkillActivity extends AppCompatActivity {
             picasso.load(challenge.image.ios_600.url).into(heroImageView);
         }
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickChallenge(challenge.id);
+            }
+        });
+
         challengesViewGroup.addView(view);
+    }
+
+    private void onClickChallenge(long challengeId) {
+        startActivity(ChallengeActivity.createIntent(this, challengeId));
     }
 }
