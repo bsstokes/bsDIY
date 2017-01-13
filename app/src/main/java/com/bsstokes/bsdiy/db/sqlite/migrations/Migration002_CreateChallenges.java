@@ -9,6 +9,7 @@ public class Migration002_CreateChallenges implements Migration {
         final String CREATE_CHALLENGES = ""
                 + "CREATE TABLE `challenges` ("
                 + "`_id` BIGINT PRIMARY KEY, "
+                + "`position` INTEGER, "
                 + "`skill_id` BIGINT, "
                 + "`active` SMALLINT DEFAULT 1, "
                 + "`title` VARCHAR, "

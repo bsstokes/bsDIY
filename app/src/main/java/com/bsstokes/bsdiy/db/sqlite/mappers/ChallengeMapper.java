@@ -29,15 +29,15 @@ public interface ChallengeMapper {
         }
     }
 
-
     class ChallengeToContentValues implements Func1<DiyApi.Challenge, ContentValues> {
 
         private static ChallengeMapper.ChallengeToContentValues INSTANCE = new ChallengeToContentValues();
 
         @NonNull
-        public static ContentValues createChallenge(@NonNull DiyApi.Challenge challenge, long skillId) {
+        public static ContentValues createChallenge(@NonNull DiyApi.Challenge challenge, long skillId, int position) {
             final ContentValues contentValues = INSTANCE.call(challenge);
             contentValues.put("skill_id", skillId);
+            contentValues.put("position", position);
             return contentValues;
         }
 

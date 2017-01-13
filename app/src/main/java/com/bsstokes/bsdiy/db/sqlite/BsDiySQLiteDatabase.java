@@ -64,21 +64,22 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     @Override
     public Observable<List<DiyApi.Challenge>> getChallenges(long skillId) {
         final String skillIdString = String.valueOf(skillId);
-        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE skill_id = ? AND active=1 ORDER BY _id ASC", skillIdString)
+        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE skill_id = ? AND active=1 ORDER BY position ASC, _id ASC", skillIdString)
                 .mapToList(new ChallengeMapper.CursorToChallenge());
     }
 
     @Override
-    public void putChallenge(DiyApi.Challenge challenge, long skillId) {
-        briteDatabase.insert("challenges", createChallenge(challenge, skillId), CONFLICT_REPLACE);
+    public void putChallenge(DiyApi.Challenge challenge, long skillId, int position) {
+        briteDatabase.insert("challenges", createChallenge(challenge, skillId, position), CONFLICT_REPLACE);
     }
 
     @Override
     public void putChallenges(List<DiyApi.Challenge> challenges, long skillId) {
         final BriteDatabase.Transaction transaction = briteDatabase.newTransaction();
         try {
-            for (final DiyApi.Challenge challenge : challenges) {
-                putChallenge(challenge, skillId);
+            for (int position = 0; position < challenges.size(); position++) {
+                final DiyApi.Challenge challenge = challenges.get(position);
+                putChallenge(challenge, skillId, position);
             }
             transaction.markSuccessful();
         } finally {

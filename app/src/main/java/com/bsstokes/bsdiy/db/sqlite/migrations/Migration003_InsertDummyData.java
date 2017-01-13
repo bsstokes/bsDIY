@@ -32,10 +32,10 @@ public class Migration003_InsertDummyData implements Migration {
         challenge1.image = new DiyApi.Challenge.Image();
         challenge1.image.ios_600 = new DiyApi.Asset();
         challenge1.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/research.jpg";
-        challenge1.image.ios_600.mime="image/jpeg";
-        challenge1.image.ios_600.width=600;
-        challenge1.image.ios_600.height=400;
-        database.insert("challenges", null, createChallenge(challenge1, skill.id));
+        challenge1.image.ios_600.mime = "image/jpeg";
+        challenge1.image.ios_600.width = 600;
+        challenge1.image.ios_600.height = 400;
+        database.insert("challenges", null, createChallenge(challenge1, skill.id, 0));
 
         final DiyApi.Challenge challenge2 = new DiyApi.Challenge();
         challenge2.id = 1000002;
@@ -45,10 +45,10 @@ public class Migration003_InsertDummyData implements Migration {
         challenge2.image = new DiyApi.Challenge.Image();
         challenge2.image.ios_600 = new DiyApi.Asset();
         challenge2.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/interview.jpg";
-        challenge2.image.ios_600.mime="image/jpeg";
-        challenge2.image.ios_600.width=600;
-        challenge2.image.ios_600.height=400;
-        database.insert("challenges", null, createChallenge(challenge2, skill.id));
+        challenge2.image.ios_600.mime = "image/jpeg";
+        challenge2.image.ios_600.width = 600;
+        challenge2.image.ios_600.height = 400;
+        database.insert("challenges", null, createChallenge(challenge2, skill.id, 1));
 
         final DiyApi.Challenge challenge3 = new DiyApi.Challenge();
         challenge3.id = 1000003;
@@ -58,10 +58,10 @@ public class Migration003_InsertDummyData implements Migration {
         challenge3.image = new DiyApi.Challenge.Image();
         challenge3.image.ios_600 = new DiyApi.Asset();
         challenge3.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/offer.jpg";
-        challenge3.image.ios_600.mime="image/jpeg";
-        challenge3.image.ios_600.width=600;
-        challenge3.image.ios_600.height=400;
-        database.insert("challenges", null, createChallenge(challenge3, skill.id));
+        challenge3.image.ios_600.mime = "image/jpeg";
+        challenge3.image.ios_600.width = 600;
+        challenge3.image.ios_600.height = 400;
+        database.insert("challenges", null, createChallenge(challenge3, skill.id, 2));
 
         final DiyApi.Challenge challenge4 = new DiyApi.Challenge();
         challenge4.id = 1000004;
@@ -71,10 +71,10 @@ public class Migration003_InsertDummyData implements Migration {
         challenge4.image = new DiyApi.Challenge.Image();
         challenge4.image.ios_600 = new DiyApi.Asset();
         challenge4.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/handshake.jpg";
-        challenge4.image.ios_600.mime="image/jpeg";
-        challenge4.image.ios_600.width=600;
-        challenge4.image.ios_600.height=400;
-        database.insert("challenges", null, createChallenge(challenge4, skill.id));
+        challenge4.image.ios_600.mime = "image/jpeg";
+        challenge4.image.ios_600.width = 600;
+        challenge4.image.ios_600.height = 400;
+        database.insert("challenges", null, createChallenge(challenge4, skill.id, 3));
 
         final DiyApi.Challenge challenge5 = new DiyApi.Challenge();
         challenge5.id = 1000005;
@@ -84,9 +84,9 @@ public class Migration003_InsertDummyData implements Migration {
         challenge5.image = new DiyApi.Challenge.Image();
         challenge5.image.ios_600 = new DiyApi.Asset();
         challenge5.image.ios_600.url = "http://bsdyi.s3.amazonaws.com/work.jpg";
-        challenge5.image.ios_600.mime="image/jpeg";
-        challenge5.image.ios_600.width=600;
-        challenge5.image.ios_600.height=400;
-        database.insert("challenges", null, createChallenge(challenge5, skill.id));
+        challenge5.image.ios_600.mime = "image/jpeg";
+        challenge5.image.ios_600.width = 600;
+        challenge5.image.ios_600.height = 400;
+        database.insert("challenges", null, createChallenge(challenge5, skill.id, 4));
     }
 }
