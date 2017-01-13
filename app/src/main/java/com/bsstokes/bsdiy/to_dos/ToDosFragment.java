@@ -32,6 +32,7 @@ public class ToDosFragment extends Fragment {
     @Inject BsDiyDatabase database;
     @Inject Picasso picasso;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final @StringRes int TITLE = R.string.to_dos;
     @SuppressWarnings("FieldCanBeLocal")
     private final @LayoutRes int LAYOUT = R.layout.fragment_to_dos;
@@ -55,7 +56,7 @@ public class ToDosFragment extends Fragment {
         final View view = inflater.inflate(LAYOUT, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        textView.setText(TITLE);
+        textView.setText(R.string.no_to_dos);
 
         return view;
     }
