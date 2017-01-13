@@ -125,9 +125,20 @@ public class SkillActivity extends AppCompatActivity {
     }
 
     private void onLoadChallenge(DiyApi.Challenge challenge) {
+        if (null == challenge) {
+            return;
+        }
+
         final View view = getLayoutInflater().inflate(R.layout.challenge_list_item_layout, challengesViewGroup, false);
+
         final TextView titleTextView = ButterKnife.findById(view, R.id.title_text_view);
         titleTextView.setText(challenge.title);
+
+        final ImageView heroImageView = ButterKnife.findById(view, R.id.hero_image_view);
+        if (null != challenge.image && null != challenge.image.ios_600 && null != challenge.image.ios_600.url) {
+            picasso.load(challenge.image.ios_600.url).into(heroImageView);
+        }
+
         challengesViewGroup.addView(view);
     }
 }
