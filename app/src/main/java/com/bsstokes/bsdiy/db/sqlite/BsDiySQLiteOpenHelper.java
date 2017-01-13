@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.db.sqlite.migrations.Migration;
 import com.bsstokes.bsdiy.db.sqlite.migrations.Migration001_CreateSkills;
+import com.bsstokes.bsdiy.db.sqlite.migrations.Migration002_CreateChallenges;
 import com.bsstokes.bsdiy.db.sqlite.migrations.Migrator;
 
 public class BsDiySQLiteOpenHelper extends SQLiteOpenHelper {
@@ -15,7 +16,8 @@ public class BsDiySQLiteOpenHelper extends SQLiteOpenHelper {
     private static final SQLiteDatabase.CursorFactory NULL_CURSOR_FACTORY = null;
 
     private static final Migrator MIGRATOR = new Migrator(new Migration[]{
-            new Migration001_CreateSkills()
+            new Migration001_CreateSkills(),
+            new Migration002_CreateChallenges()
     });
 
     public BsDiySQLiteOpenHelper(@NonNull Context context) {
