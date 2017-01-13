@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper;
 import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper;
 import com.squareup.sqlbrite.BriteDatabase;
 
@@ -58,6 +59,13 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
         } finally {
             transaction.end();
         }
+    }
+
+    @Override
+    public Observable<List<DiyApi.Challenge>> getChallenges(long skillId) {
+        final String skillIdString = String.valueOf(skillId);
+        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE skill_id = ? AND active=1 ORDER BY _id ASC", skillIdString)
+                .mapToList(new ChallengeMapper.CursorToChallenge());
     }
 
     @Override

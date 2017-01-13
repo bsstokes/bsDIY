@@ -19,6 +19,8 @@ public interface BsDiyDatabase {
 
     void putSkills(List<DiyApi.Skill> skills);
 
+    Observable<List<DiyApi.Challenge>> getChallenges(long skillId);
+
     void putChallenge(DiyApi.Challenge challenge, long skillId);
 
     void putChallenges(List<DiyApi.Challenge> challenges, long skillId);

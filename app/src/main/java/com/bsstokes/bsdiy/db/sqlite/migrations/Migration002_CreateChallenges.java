@@ -13,7 +13,10 @@ public class Migration002_CreateChallenges implements Migration {
                 + "`active` SMALLINT DEFAULT 1, "
                 + "`title` VARCHAR, "
                 + "`description` VARCHAR, "
-                + "`image_ios_600_url` VARCHAR"
+                + "`image_ios_600_url` VARCHAR, "
+                + "`image_ios_600_mime` VARCHAR, "
+                + "`image_ios_600_width` INTEGER, "
+                + "`image_ios_600_height` INTEGER "
                 + ");";
         database.execSQL(CREATE_CHALLENGES);
     }
