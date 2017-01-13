@@ -22,7 +22,17 @@ public class SkillsSyncService extends IntentService {
         context.startService(intent);
     }
 
+    public static void startActionSyncChallenges(@NonNull Context context, @NonNull String skillUrl) {
+        final Intent intent = new Intent(context, SkillsSyncService.class);
+        intent.setAction(ACTION_SYNC_CHALLENGES);
+        intent.putExtra(EXTRA_SKILL_URL, skillUrl);
+        context.startService(intent);
+    }
+
     private static final String ACTION_SYNC_SKILLS = "com.bsstokes.bsdiy.action.SYNC_SKILLS";
+    private static final String ACTION_SYNC_CHALLENGES = "com.bsstokes.bsdiy.action.SYNC_CHALLENGES";
+
+    private static final String EXTRA_SKILL_URL = "skillUrl";
 
     @Inject DiyApi diyApi;
     @Inject BsDiyDatabase database;
@@ -41,12 +51,24 @@ public class SkillsSyncService extends IntentService {
             final String action = intent.getAction();
             if (ACTION_SYNC_SKILLS.equals(action)) {
                 handleActionSyncSkills();
+            } else if (ACTION_SYNC_CHALLENGES.equals(action)) {
+                final String skillUrl = intent.getStringExtra(EXTRA_SKILL_URL);
+                handleActionSyncChallenges(skillUrl);
             }
         }
     }
 
     private void handleActionSyncSkills() {
-        SkillsDownloader skillsDownloader = new SkillsDownloader(diyApi, database);
+        final SkillsDownloader skillsDownloader = new SkillsDownloader(diyApi, database);
         skillsDownloader.syncSkills();
+    }
+
+    private void handleActionSyncChallenges(@Nullable String skillUrl) {
+        if (null == skillUrl) {
+            return;
+        }
+
+        final ChallengesDownloader challengesDownloader = new ChallengesDownloader(diyApi, database, skillUrl);
+        challengesDownloader.syncChallenges();
     }
 }
