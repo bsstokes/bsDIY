@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@android:color/white</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">@color/diy_purple_medium</color>
     <color name="colorAccent">@color/diy_turquoise</color>
 
     <color name="diy_purple_darkest">#1f1f26</color>
