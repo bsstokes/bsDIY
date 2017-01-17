@@ -13,7 +13,16 @@ import com.bsstokes.bsdiy.db.sqlite.migrations.Migrator;
 
 public class BsDiySQLiteOpenHelper extends SQLiteOpenHelper {
 
+    public static BsDiySQLiteOpenHelper create(@NonNull Context context) {
+        return new BsDiySQLiteOpenHelper(context, DATABASE_NAME);
+    }
+
+    public static BsDiySQLiteOpenHelper createInMemory(@NonNull Context context) {
+        return new BsDiySQLiteOpenHelper(context, IN_MEMORY_DATABASE_NAME);
+    }
+
     private static final String DATABASE_NAME = "bsdiy.db";
+    private static final String IN_MEMORY_DATABASE_NAME = null;
     private static final SQLiteDatabase.CursorFactory NULL_CURSOR_FACTORY = null;
 
     private static final Migrator MIGRATOR = new Migrator(new Migration[]{
@@ -22,8 +31,8 @@ public class BsDiySQLiteOpenHelper extends SQLiteOpenHelper {
             new Migration003_InsertDummyData()
     });
 
-    public BsDiySQLiteOpenHelper(@NonNull Context context) {
-        super(context, DATABASE_NAME, NULL_CURSOR_FACTORY, MIGRATOR.getVersion());
+    private BsDiySQLiteOpenHelper(@NonNull Context context, String databaseName) {
+        super(context, databaseName, NULL_CURSOR_FACTORY, MIGRATOR.getVersion());
     }
 
     @Override

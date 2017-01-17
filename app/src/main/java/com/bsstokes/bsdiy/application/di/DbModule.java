@@ -32,6 +32,6 @@ class DbModule {
     @Provides
     @Singleton
     BsDiySQLiteOpenHelper provideBsDiySQLiteOpenHelper(BsDiyApplication application) {
-        return new BsDiySQLiteOpenHelper(application.getApplicationContext());
+        return BsDiySQLiteOpenHelper.create(application.getApplicationContext());
     }
 }
