@@ -85,5 +85,4 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
             transaction.end()
         }
     }
-
 }
