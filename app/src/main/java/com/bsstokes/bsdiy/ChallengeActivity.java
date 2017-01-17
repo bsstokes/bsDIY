@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.ui.ActionBarHelper;
 import com.squareup.picasso.Picasso;
 
@@ -75,9 +76,9 @@ public class ChallengeActivity extends AppCompatActivity {
         final Subscription getSkill = database.getSkill(skillId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<DiyApi.Skill>() {
+                .subscribe(new Action1<Skill>() {
                     @Override
-                    public void call(DiyApi.Skill skill) {
+                    public void call(Skill skill) {
                         onLoadSkill(skill);
                     }
                 });
@@ -101,9 +102,9 @@ public class ChallengeActivity extends AppCompatActivity {
         subscriptions.clear();
     }
 
-    private void onLoadSkill(DiyApi.Skill skill) {
-        if (null != skill && null != skill.icons && null != skill.icons.medium) {
-            picasso.load(DiyApi.Helper.normalizeUrl(skill.icons.medium)).into(patchImageView);
+    private void onLoadSkill(Skill skill) {
+        if (null != skill && null != skill.getIconMedium()) {
+            picasso.load(DiyApi.Helper.normalizeUrl(skill.getIconMedium())).into(patchImageView);
         }
     }
 

@@ -4,20 +4,22 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import rx.Observable;
 
 public interface BsDiyDatabase {
-    Observable<List<DiyApi.Skill>> getAllSkills();
+    Observable<List<Skill>> getAllSkills();
 
-    Observable<DiyApi.Skill> getSkill(long skillId);
+    Observable<Skill> getSkill(long skillId);
 
-    Observable<DiyApi.Skill> getSkillByUrl(@NonNull String skillUrl);
+    Observable<Skill> getSkillByUrl(@NonNull String skillUrl);
 
-    void putSkill(DiyApi.Skill skill);
+    void putSkill(Skill skill);
 
-    void putSkills(List<DiyApi.Skill> skills);
+    void putSkills(@NotNull List<Skill> skills);
 
     Observable<List<DiyApi.Challenge>> getChallenges(long skillId);
 

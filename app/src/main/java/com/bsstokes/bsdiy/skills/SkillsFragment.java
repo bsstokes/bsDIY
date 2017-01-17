@@ -17,6 +17,7 @@ import com.bsstokes.bsdiy.SkillActivity;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.ui.GridDividerDecoration;
 import com.squareup.picasso.Picasso;
@@ -100,14 +101,14 @@ public class SkillsFragment extends Fragment implements SkillsAdapter.OnClickIte
     public void onResume() {
         super.onResume();
 
-        final Observable<List<DiyApi.Skill>> getAllSkills = database.getAllSkills()
+        final Observable<List<Skill>> getAllSkills = database.getAllSkills()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
         final Subscription subscription = getAllSkills
-                .subscribe(new Action1<List<DiyApi.Skill>>() {
+                .subscribe(new Action1<List<Skill>>() {
                     @Override
-                    public void call(List<DiyApi.Skill> skills) {
+                    public void call(List<Skill> skills) {
                         skillsAdapter.loadSkills(skills);
                     }
                 });

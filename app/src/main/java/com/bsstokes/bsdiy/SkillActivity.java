@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.ui.ActionBarHelper;
 import com.squareup.picasso.Picasso;
@@ -75,9 +76,9 @@ public class SkillActivity extends AppCompatActivity {
         final Subscription getSkill = database.getSkill(skillId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<DiyApi.Skill>() {
+                .subscribe(new Action1<Skill>() {
                     @Override
-                    public void call(DiyApi.Skill skill) {
+                    public void call(Skill skill) {
                         onLoadSkill(skill);
                     }
                 });
@@ -101,26 +102,26 @@ public class SkillActivity extends AppCompatActivity {
         subscriptions.clear();
     }
 
-    private void onLoadSkill(DiyApi.Skill skill) {
+    private void onLoadSkill(Skill skill) {
         if (null == skill) {
             // TODO: Handle missing skill better
             return;
         }
 
-        if (null != skill.url) {
+        if (null != skill.getUrl()) {
             // TODO: Not the best place to put this because it might be firing
             // too often.
-            ApiSyncService.syncChallenges(this, skill.url);
+            ApiSyncService.syncChallenges(this, skill.getUrl());
         }
 
-        setTitle(skill.title);
+        setTitle(skill.getTitle());
 
-        if (null != skill.images && null != skill.images.large) {
-            final String imageUrl = DiyApi.Helper.normalizeUrl(skill.images.large);
+        if (null != skill.getImageLarge()) {
+            final String imageUrl = DiyApi.Helper.normalizeUrl(skill.getImageLarge());
             picasso.load(imageUrl).into(patchImageView);
         }
 
-        descriptionTextView.setText(skill.description);
+        descriptionTextView.setText(skill.getDescription());
     }
 
     private void onLoadChallenges(List<DiyApi.Challenge> challenges) {

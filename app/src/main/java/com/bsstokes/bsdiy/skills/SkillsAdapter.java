@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.api.DiyApi;
+import com.bsstokes.bsdiy.db.Skill;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     private final @NonNull Picasso picasso;
     private final @NonNull OnClickItemListener listener;
 
-    private List<DiyApi.Skill> skills = Collections.emptyList();
+    private List<Skill> skills = Collections.emptyList();
 
     SkillsAdapter(@NonNull Context context, @NonNull Picasso picasso, @NonNull OnClickItemListener listener) {
         this.layoutInflater = LayoutInflater.from(context);
@@ -49,9 +50,9 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final DiyApi.Skill skill = getSkill(position);
+        final Skill skill = getSkill(position);
         holder.bindSkill(skill);
-        holder.skillTitleTextView.setText(skill.title);
+        holder.skillTitleTextView.setText(skill.getTitle());
 
         final String imageUrl = chooseImage(skill);
         if (!TextUtils.isEmpty(imageUrl)) {
@@ -66,15 +67,15 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
     @Override
     public long getItemId(int position) {
-        return getSkill(position).id;
+        return getSkill(position).getId();
     }
 
-    void loadSkills(List<DiyApi.Skill> skills) {
+    void loadSkills(List<Skill> skills) {
         this.skills = skills;
         notifyDataSetChanged();
     }
 
-    private DiyApi.Skill getSkill(int position) {
+    private Skill getSkill(int position) {
         return skills.get(position);
     }
 
@@ -89,8 +90,8 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        void bindSkill(@NonNull DiyApi.Skill skill) {
-            skillId = skill.id;
+        void bindSkill(@NonNull Skill skill) {
+            skillId = skill.getId();
         }
 
         @OnClick
@@ -100,16 +101,13 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     }
 
     @Nullable
-    private String chooseImage(@NonNull DiyApi.Skill skill) {
-        final DiyApi.Skill.Images images = skill.images;
-        if (null == images) {
-            return null;
-        } else if (!TextUtils.isEmpty(images.large)) {
-            return DiyApi.Helper.normalizeUrl(images.large);
-        } else if (!TextUtils.isEmpty(images.medium)) {
-            return DiyApi.Helper.normalizeUrl(images.medium);
-        } else if (!TextUtils.isEmpty(images.small)) {
-            return DiyApi.Helper.normalizeUrl(images.small);
+    private String chooseImage(@NonNull Skill skill) {
+        if (!TextUtils.isEmpty(skill.getImageLarge())) {
+            return DiyApi.Helper.normalizeUrl(skill.getImageLarge());
+        } else if (!TextUtils.isEmpty(skill.getImageMedium())) {
+            return DiyApi.Helper.normalizeUrl(skill.getImageMedium());
+        } else if (!TextUtils.isEmpty(skill.getImageSmall())) {
+            return DiyApi.Helper.normalizeUrl(skill.getImageSmall());
         } else {
             return null;
         }

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Skill;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ class ChallengesDownloader {
     }
 
     private void onDownloadChallenge(List<DiyApi.Challenge> challenges) {
-        final DiyApi.Skill skill = database.getSkillByUrl(skillUrl)
+        final Skill skill = database.getSkillByUrl(skillUrl)
                 .subscribeOn(Schedulers.immediate())
                 .observeOn(Schedulers.immediate())
                 .toBlocking()
@@ -76,7 +77,7 @@ class ChallengesDownloader {
         }
 
         if (null != challenges) {
-            database.putChallenges(challenges, skill.id);
+            database.putChallenges(challenges, skill.getId());
         }
     }
 }

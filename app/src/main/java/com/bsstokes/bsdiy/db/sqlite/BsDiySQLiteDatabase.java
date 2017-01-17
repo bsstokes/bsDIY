@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper;
-import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper;
+import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapping;
+import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMappingKt;
 import com.squareup.sqlbrite.BriteDatabase;
 
 import java.util.List;
@@ -14,7 +16,6 @@ import rx.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
 import static com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper.ChallengeToContentValues.createChallenge;
-import static com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapper.SkillToContentValues.createSkill;
 
 public class BsDiySQLiteDatabase implements BsDiyDatabase {
 
@@ -25,34 +26,34 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
-    public Observable<List<DiyApi.Skill>> getAllSkills() {
-        return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE active=1 ORDER BY priority DESC, title ASC")
-                .mapToList(new SkillMapper.CursorToSkill());
+    public Observable<List<Skill>> getAllSkills() {
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, "SELECT * FROM skills WHERE active=1 ORDER BY priority DESC, title ASC")
+                .mapToList(SkillMapping.M.INSTANCE);
     }
 
     @Override
-    public Observable<DiyApi.Skill> getSkill(long skillId) {
+    public Observable<Skill> getSkill(long skillId) {
         final String skillIdString = String.valueOf(skillId);
-        return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE _id = ? LIMIT 1", skillIdString)
-                .mapToOneOrDefault(new SkillMapper.CursorToSkill(), null);
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, "SELECT * FROM skills WHERE _id = ? LIMIT 1", skillIdString)
+                .mapToOneOrDefault(SkillMapping.M.INSTANCE, null);
     }
 
     @Override
-    public Observable<DiyApi.Skill> getSkillByUrl(@NonNull String skillUrl) {
-        return briteDatabase.createQuery("skills", "SELECT * FROM skills WHERE url = ? LIMIT 1", skillUrl)
-                .mapToOneOrDefault(new SkillMapper.CursorToSkill(), null);
+    public Observable<Skill> getSkillByUrl(@NonNull String skillUrl) {
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, "SELECT * FROM skills WHERE url = ? LIMIT 1", skillUrl)
+                .mapToOneOrDefault(SkillMapping.M.INSTANCE, null);
     }
 
     @Override
-    public void putSkill(@NonNull DiyApi.Skill skill) {
-        briteDatabase.insert("skills", createSkill(skill), CONFLICT_REPLACE);
+    public void putSkill(Skill skill) {
+        briteDatabase.insert(SkillMapping.Table.NAME, SkillMappingKt.toContentValues(skill), CONFLICT_REPLACE);
     }
 
     @Override
-    public void putSkills(List<DiyApi.Skill> skills) {
+    public void putSkills(@NonNull List<Skill> skills) {
         final BriteDatabase.Transaction transaction = briteDatabase.newTransaction();
         try {
-            for (final DiyApi.Skill skill : skills) {
+            for (final Skill skill : skills) {
                 putSkill(skill);
             }
             transaction.markSuccessful();
