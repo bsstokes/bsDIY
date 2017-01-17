@@ -1,9 +1,8 @@
 package com.bsstokes.bsdiy.db.sqlite.migrations
 
 import android.database.sqlite.SQLiteDatabase
-import com.bsstokes.bsdiy.api.DiyApi
+import com.bsstokes.bsdiy.db.Challenge
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper.ChallengeToContentValues.createChallenge
 import com.bsstokes.bsdiy.db.sqlite.mappers.toContentValues
 
 class Migration003_InsertDummyData : Migration {
@@ -28,69 +27,79 @@ class Migration003_InsertDummyData : Migration {
         contentValues.put("priority", 10)
         database.insert("skills", null, contentValues)
 
-        val challenge1 = DiyApi.Challenge()
-        challenge1.id = 1000001
-        challenge1.active = true
-        challenge1.title = "Get Familiar with Him"
-        challenge1.description = "Who's this Brian guy and what does he want? Put together clues by looking over his resume, website and anything else you can find about him."
-        challenge1.image = DiyApi.Challenge.Image()
-        challenge1.image!!.ios_600 = DiyApi.Asset()
-        challenge1.image!!.ios_600!!.url = "https://bsdyi.s3.amazonaws.com/research.jpg"
-        challenge1.image!!.ios_600!!.mime = "image/jpeg"
-        challenge1.image!!.ios_600!!.width = 600
-        challenge1.image!!.ios_600!!.height = 400
-        database.insert("challenges", null, createChallenge(challenge1, skill.id, 0))
+        database.insert("challenges", null,
+                Challenge(
+                        id = 1000001,
+                        active = true,
+                        title = "Get Familiar with Him",
+                        description = "Who's this Brian guy and what does he want? Put together clues by looking over his resume, website and anything else you can find about him.",
+                        imageIos600Url = "https://bsdyi.s3.amazonaws.com/research.jpg",
+                        imageIos600Mime = "image/jpeg",
+                        imageIos600Width = 600,
+                        imageIos600Height = 400,
+                        position = 0,
+                        skillId = skill.id
+                ).toContentValues()
+        )
 
-        val challenge2 = DiyApi.Challenge()
-        challenge2.id = 1000002
-        challenge2.active = true
-        challenge2.title = "Conduct Some Interviews"
-        challenge2.description = "Now you're armed with a little bit of information, you're ready to make contact. Let everybody put Brian through the wringer to figure him out."
-        challenge2.image = DiyApi.Challenge.Image()
-        challenge2.image!!.ios_600 = DiyApi.Asset()
-        challenge2.image!!.ios_600!!.url = "https://bsdyi.s3.amazonaws.com/interview.jpg"
-        challenge2.image!!.ios_600!!.mime = "image/jpeg"
-        challenge2.image!!.ios_600!!.width = 600
-        challenge2.image!!.ios_600!!.height = 400
-        database.insert("challenges", null, createChallenge(challenge2, skill.id, 1))
+        database.insert("challenges", null,
+                Challenge(
+                        id = 1000002,
+                        active = true,
+                        title = "Conduct Some Interviews",
+                        description = "Now you're armed with a little bit of information, you're ready to make contact. Let everybody put Brian through the wringer to figure him out.",
+                        imageIos600Url = "https://bsdyi.s3.amazonaws.com/interview.jpg",
+                        imageIos600Mime = "image/jpeg",
+                        imageIos600Width = 600,
+                        imageIos600Height = 400,
+                        position = 1,
+                        skillId = skill.id
+                ).toContentValues()
+        )
 
-        val challenge3 = DiyApi.Challenge()
-        challenge3.id = 1000003
-        challenge3.active = true
-        challenge3.title = "Make an Offer"
-        challenge3.description = "You love this guy! You just gotta have him on your team. Make him a generous offer, and you'll be on your way to making it a reality."
-        challenge3.image = DiyApi.Challenge.Image()
-        challenge3.image!!.ios_600 = DiyApi.Asset()
-        challenge3.image!!.ios_600!!.url = "https://bsdyi.s3.amazonaws.com/offer.jpg"
-        challenge3.image!!.ios_600!!.mime = "image/jpeg"
-        challenge3.image!!.ios_600!!.width = 600
-        challenge3.image!!.ios_600!!.height = 400
-        database.insert("challenges", null, createChallenge(challenge3, skill.id, 2))
+        database.insert("challenges", null,
+                Challenge(
+                        id = 1000003,
+                        active = true,
+                        title = "Make an Offer",
+                        description = "You love this guy! You just gotta have him on your team. Make him a generous offer, and you'll be on your way to making it a reality.",
+                        imageIos600Url = "https://bsdyi.s3.amazonaws.com/offer.jpg",
+                        imageIos600Mime = "image/jpeg",
+                        imageIos600Width = 600,
+                        imageIos600Height = 400,
+                        position = 2,
+                        skillId = skill.id
+                ).toContentValues()
+        )
 
-        val challenge4 = DiyApi.Challenge()
-        challenge4.id = 1000004
-        challenge4.active = true
-        challenge4.title = "Hire Brian"
-        challenge4.description = "Everybody's on the same page. We just have to make official. Let's get all the paperwork mumbo jumbo out of the way."
-        challenge4.image = DiyApi.Challenge.Image()
-        challenge4.image!!.ios_600 = DiyApi.Asset()
-        challenge4.image!!.ios_600!!.url = "https://bsdyi.s3.amazonaws.com/handshake.jpg"
-        challenge4.image!!.ios_600!!.mime = "image/jpeg"
-        challenge4.image!!.ios_600!!.width = 600
-        challenge4.image!!.ios_600!!.height = 400
-        database.insert("challenges", null, createChallenge(challenge4, skill.id, 3))
+        database.insert("challenges", null,
+                Challenge(
+                        id = 1000004,
+                        active = true,
+                        title = "Hire Brian",
+                        description = "Everybody's on the same page. We just have to make official. Let's get all the paperwork mumbo jumbo out of the way.",
+                        imageIos600Url = "https://bsdyi.s3.amazonaws.com/handshake.jpg",
+                        imageIos600Mime = "image/jpeg",
+                        imageIos600Width = 600,
+                        imageIos600Height = 400,
+                        position = 3,
+                        skillId = skill.id
+                ).toContentValues()
+        )
 
-        val challenge5 = DiyApi.Challenge()
-        challenge5.id = 1000005
-        challenge5.active = true
-        challenge5.title = "Let's Get to Work!"
-        challenge5.description = "Congratulations. We have a lot of work to do, and let's get to it!"
-        challenge5.image = DiyApi.Challenge.Image()
-        challenge5.image!!.ios_600 = DiyApi.Asset()
-        challenge5.image!!.ios_600!!.url = "https://bsdyi.s3.amazonaws.com/work.jpg"
-        challenge5.image!!.ios_600!!.mime = "image/jpeg"
-        challenge5.image!!.ios_600!!.width = 600
-        challenge5.image!!.ios_600!!.height = 400
-        database.insert("challenges", null, createChallenge(challenge5, skill.id, 4))
+        database.insert("challenges", null,
+                Challenge(
+                        id = 1000005,
+                        active = true,
+                        title = "Let's Get to Work!",
+                        description = "Congratulations. We have a lot of work to do, and let's get to it!",
+                        imageIos600Url = "https://bsdyi.s3.amazonaws.com/work.jpg",
+                        imageIos600Mime = "image/jpeg",
+                        imageIos600Width = 600,
+                        imageIos600Height = 400,
+                        position = 4,
+                        skillId = skill.id
+                ).toContentValues()
+        )
     }
 }
