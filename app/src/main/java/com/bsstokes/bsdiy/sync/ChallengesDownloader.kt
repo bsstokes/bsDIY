@@ -3,7 +3,7 @@ package com.bsstokes.bsdiy.sync
 import android.util.Log
 import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.db.BsDiyDatabase
-import com.bsstokes.bsdiy.sync.mappers.apiChallengeToChallenge
+import com.bsstokes.bsdiy.sync.apiChallengeToChallenge
 import retrofit2.Response
 import rx.Observer
 import rx.schedulers.Schedulers

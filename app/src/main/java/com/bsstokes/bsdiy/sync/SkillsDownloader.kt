@@ -4,7 +4,7 @@ import android.util.Log
 import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.sync.mappers.apiSkillToSkill
+import com.bsstokes.bsdiy.sync.apiSkillToSkill
 import retrofit2.Response
 import rx.Observer
 
