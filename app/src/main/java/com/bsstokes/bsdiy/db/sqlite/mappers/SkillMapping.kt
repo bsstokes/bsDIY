@@ -3,7 +3,6 @@ package com.bsstokes.bsdiy.db.sqlite.mappers
 import android.content.ContentValues
 import android.database.Cursor
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.db.sqlite.Db
 import rx.functions.Func1
 
 class SkillMapping {
@@ -51,16 +50,16 @@ fun Skill.toContentValues(): ContentValues {
 
 fun Cursor.toSkill(): Skill {
     return Skill(
-            id = Db.getLong(this, SkillMapping.Columns.ID),
-            active = Db.getBoolean(this, SkillMapping.Columns.ACTIVE),
-            url = Db.getString(this, SkillMapping.Columns.URL),
-            title = Db.getString(this, SkillMapping.Columns.TITLE),
-            description = Db.getString(this, SkillMapping.Columns.DESCRIPTION),
-            color = Db.getString(this, SkillMapping.Columns.COLOR),
-            iconSmall = Db.getString(this, SkillMapping.Columns.ICON_SMALL),
-            iconMedium = Db.getString(this, SkillMapping.Columns.ICON_MEDIUM),
-            imageSmall = Db.getString(this, SkillMapping.Columns.IMAGE_SMALL),
-            imageMedium = Db.getString(this, SkillMapping.Columns.IMAGE_MEDIUM),
-            imageLarge = Db.getString(this, SkillMapping.Columns.IMAGE_LARGE)
+            id = getLong(SkillMapping.Columns.ID),
+            active = getBoolean(SkillMapping.Columns.ACTIVE),
+            url = getString(SkillMapping.Columns.URL),
+            title = getString(SkillMapping.Columns.TITLE),
+            description = getString(SkillMapping.Columns.DESCRIPTION),
+            color = getString(SkillMapping.Columns.COLOR),
+            iconSmall = getString(SkillMapping.Columns.ICON_SMALL),
+            iconMedium = getString(SkillMapping.Columns.ICON_MEDIUM),
+            imageSmall = getString(SkillMapping.Columns.IMAGE_SMALL),
+            imageMedium = getString(SkillMapping.Columns.IMAGE_MEDIUM),
+            imageLarge = getString(SkillMapping.Columns.IMAGE_LARGE)
     )
 }

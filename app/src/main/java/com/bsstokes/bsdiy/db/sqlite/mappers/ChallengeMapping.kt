@@ -3,7 +3,6 @@ package com.bsstokes.bsdiy.db.sqlite.mappers
 import android.content.ContentValues
 import android.database.Cursor
 import com.bsstokes.bsdiy.db.Challenge
-import com.bsstokes.bsdiy.db.sqlite.Db
 import rx.functions.Func1
 
 class ChallengeMapping {
@@ -48,15 +47,15 @@ fun Challenge.toContentValues(): ContentValues {
 
 fun Cursor.toChallenge(): Challenge {
     return Challenge(
-            id = Db.getLong(this, ChallengeMapping.Columns.ID),
-            skillId = Db.getLong(this, ChallengeMapping.Columns.SKILL_ID),
-            active = Db.getBoolean(this, ChallengeMapping.Columns.ACTIVE),
-            title = Db.getString(this, ChallengeMapping.Columns.TITLE),
-            description = Db.getString(this, ChallengeMapping.Columns.DESCRIPTION),
-            imageIos600Url = Db.getString(this, ChallengeMapping.Columns.IMAGE_IOS_600_URL),
-            imageIos600Mime = Db.getString(this, ChallengeMapping.Columns.IMAGE_IOS_600_MIME),
-            imageIos600Width = Db.getInt(this, ChallengeMapping.Columns.IMAGE_IOS_600_WIDTH),
-            imageIos600Height = Db.getInt(this, ChallengeMapping.Columns.IMAGE_IOS_600_HEIGHT),
-            position = Db.getInt(this, ChallengeMapping.Columns.POSITION)
+            id = getLong(ChallengeMapping.Columns.ID),
+            skillId = getLong(ChallengeMapping.Columns.SKILL_ID),
+            active = getBoolean(ChallengeMapping.Columns.ACTIVE),
+            title = getString(ChallengeMapping.Columns.TITLE),
+            description = getString(ChallengeMapping.Columns.DESCRIPTION),
+            imageIos600Url = getString(ChallengeMapping.Columns.IMAGE_IOS_600_URL),
+            imageIos600Mime = getString(ChallengeMapping.Columns.IMAGE_IOS_600_MIME),
+            imageIos600Width = getInt(ChallengeMapping.Columns.IMAGE_IOS_600_WIDTH),
+            imageIos600Height = getInt(ChallengeMapping.Columns.IMAGE_IOS_600_HEIGHT),
+            position = getInt(ChallengeMapping.Columns.POSITION)
     )
 }
