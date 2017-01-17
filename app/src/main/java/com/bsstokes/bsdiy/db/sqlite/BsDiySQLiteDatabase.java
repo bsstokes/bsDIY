@@ -75,17 +75,10 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
-    public Observable<Challenge> getDbChallenge(long challengeId) {
+    public Observable<Challenge> getChallenge(long challengeId) {
         final String challengeIdString = String.valueOf(challengeId);
         return briteDatabase.createQuery(ChallengeMapping.Table.NAME, "SELECT * FROM challenges WHERE _id = ? LIMIT 1", challengeIdString)
                 .mapToOneOrDefault(ChallengeMapping.M.INSTANCE, null);
-    }
-
-    @Override
-    public Observable<DiyApi.Challenge> getChallenge(long challengeId) {
-        final String challengeIdString = String.valueOf(challengeId);
-        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE _id = ? LIMIT 1", challengeIdString)
-                .mapToOneOrDefault(new ChallengeMapper.CursorToChallenge(), null);
     }
 
     @Override

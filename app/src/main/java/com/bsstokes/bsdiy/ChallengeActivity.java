@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Challenge;
 import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.ui.ActionBarHelper;
 import com.squareup.picasso.Picasso;
@@ -87,9 +88,9 @@ public class ChallengeActivity extends AppCompatActivity {
         final Subscription getChallenge = database.getChallenge(challengeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<DiyApi.Challenge>() {
+                .subscribe(new Action1<Challenge>() {
                     @Override
-                    public void call(DiyApi.Challenge challenge) {
+                    public void call(Challenge challenge) {
                         onLoadChallenge(challenge);
                     }
                 });
@@ -108,10 +109,10 @@ public class ChallengeActivity extends AppCompatActivity {
         }
     }
 
-    private void onLoadChallenge(DiyApi.Challenge challenge) {
+    private void onLoadChallenge(Challenge challenge) {
         setTitle("");
-        titleTextView.setText(challenge.title);
-        descriptionTextView.setText(challenge.description);
+        titleTextView.setText(challenge.getTitle());
+        descriptionTextView.setText(challenge.getDescription());
     }
 
     @Override

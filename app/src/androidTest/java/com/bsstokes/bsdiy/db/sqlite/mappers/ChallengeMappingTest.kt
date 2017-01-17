@@ -44,7 +44,7 @@ class ChallengeMappingTest {
         )
 
         database!!.putChallenge(challenge)
-        val dbChallenge = database!!.getDbChallenge(challenge.id).toBlocking().first()
+        val dbChallenge = database!!.getChallenge(challenge.id).toBlocking().first()
 
         assertEquals(challenge, dbChallenge)
     }
