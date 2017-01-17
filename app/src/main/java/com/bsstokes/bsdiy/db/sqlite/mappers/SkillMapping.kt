@@ -23,6 +23,7 @@ class SkillMapping {
         const val IMAGE_SMALL = "image_small"
         const val IMAGE_MEDIUM = "image_medium"
         const val IMAGE_LARGE = "image_large"
+        const val PRIORITY = "priority"
     }
 
     object M : Func1<Cursor, Skill?> {
