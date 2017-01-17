@@ -2,11 +2,9 @@ package com.bsstokes.bsdiy.db.sqlite;
 
 import android.support.annotation.NonNull;
 
-import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
 import com.bsstokes.bsdiy.db.Challenge;
 import com.bsstokes.bsdiy.db.Skill;
-import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper;
 import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapping;
 import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMappingKt;
 import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapping;
@@ -20,7 +18,6 @@ import java.util.List;
 import rx.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
-import static com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper.ChallengeToContentValues.createChallenge;
 
 public class BsDiySQLiteDatabase implements BsDiyDatabase {
 
@@ -87,17 +84,12 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
-    public void putChallenge(DiyApi.Challenge challenge, long skillId, int position) {
-        briteDatabase.insert("challenges", createChallenge(challenge, skillId, position), CONFLICT_REPLACE);
-    }
-
-    @Override
-    public void putChallenges(List<DiyApi.Challenge> challenges, long skillId) {
+    public void putChallenges(List<Challenge> challenges) {
         final BriteDatabase.Transaction transaction = briteDatabase.newTransaction();
         try {
             for (int position = 0; position < challenges.size(); position++) {
-                final DiyApi.Challenge challenge = challenges.get(position);
-                putChallenge(challenge, skillId, position);
+                final Challenge challenge = challenges.get(position);
+                putChallenge(challenge);
             }
             transaction.markSuccessful();
         } finally {

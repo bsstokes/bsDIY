@@ -2,8 +2,6 @@ package com.bsstokes.bsdiy.db;
 
 import android.support.annotation.NonNull;
 
-import com.bsstokes.bsdiy.api.DiyApi;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -27,7 +25,5 @@ public interface BsDiyDatabase {
 
     void putChallenge(@NotNull Challenge challenge);
 
-    void putChallenge(DiyApi.Challenge challenge, long skillId, int position);
-
-    void putChallenges(List<DiyApi.Challenge> challenges, long skillId);
+    void putChallenges(List<Challenge> challenges);
 }
