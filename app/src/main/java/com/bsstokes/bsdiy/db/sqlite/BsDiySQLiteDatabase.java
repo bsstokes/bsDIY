@@ -68,10 +68,10 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
-    public Observable<List<DiyApi.Challenge>> getChallenges(long skillId) {
+    public Observable<List<Challenge>> getChallenges(long skillId) {
         final String skillIdString = String.valueOf(skillId);
-        return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE skill_id = ? AND active=1 ORDER BY position ASC, _id ASC", skillIdString)
-                .mapToList(new ChallengeMapper.CursorToChallenge());
+        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, "SELECT * FROM challenges WHERE skill_id = ? AND active=1 ORDER BY position ASC, _id ASC", skillIdString)
+                .mapToList(ChallengeMapping.M.INSTANCE);
     }
 
     @Override

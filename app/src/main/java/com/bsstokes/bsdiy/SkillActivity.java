@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Challenge;
 import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.ui.ActionBarHelper;
@@ -87,9 +88,9 @@ public class SkillActivity extends AppCompatActivity {
         final Subscription getChallenges = database.getChallenges(skillId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<DiyApi.Challenge>>() {
+                .subscribe(new Action1<List<Challenge>>() {
                     @Override
-                    public void call(List<DiyApi.Challenge> challenges) {
+                    public void call(List<Challenge> challenges) {
                         onLoadChallenges(challenges);
                     }
                 });
@@ -124,14 +125,14 @@ public class SkillActivity extends AppCompatActivity {
         descriptionTextView.setText(skill.getDescription());
     }
 
-    private void onLoadChallenges(List<DiyApi.Challenge> challenges) {
+    private void onLoadChallenges(List<Challenge> challenges) {
         challengesViewGroup.removeAllViews();
-        for (final DiyApi.Challenge challenge : challenges) {
+        for (final Challenge challenge : challenges) {
             onLoadChallenge(challenge);
         }
     }
 
-    private void onLoadChallenge(final DiyApi.Challenge challenge) {
+    private void onLoadChallenge(final Challenge challenge) {
         if (null == challenge) {
             return;
         }
@@ -139,17 +140,17 @@ public class SkillActivity extends AppCompatActivity {
         final View view = getLayoutInflater().inflate(R.layout.challenge_list_item_layout, challengesViewGroup, false);
 
         final TextView titleTextView = ButterKnife.findById(view, R.id.title_text_view);
-        titleTextView.setText(challenge.title);
+        titleTextView.setText(challenge.getTitle());
 
         final ImageView heroImageView = ButterKnife.findById(view, R.id.hero_image_view);
-        if (null != challenge.image && null != challenge.image.ios_600 && null != challenge.image.ios_600.url) {
-            picasso.load(challenge.image.ios_600.url).into(heroImageView);
+        if (null != challenge.getImageIos600Url()) {
+            picasso.load(challenge.getImageIos600Url()).into(heroImageView);
         }
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickChallenge(challenge.id);
+                onClickChallenge(challenge.getId());
             }
         });
 
