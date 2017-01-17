@@ -45,7 +45,7 @@ class SkillMappingTest {
         )
 
         database!!.putSkill(skill)
-        val dbSkill = database!!.getDbSkill(1234).toBlocking().first()
+        val dbSkill = database!!.getSkill(1234).toBlocking().first()
 
         assertEquals(skill, dbSkill)
     }
