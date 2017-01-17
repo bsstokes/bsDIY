@@ -103,11 +103,11 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     @Nullable
     private String chooseImage(@NonNull Skill skill) {
         if (!TextUtils.isEmpty(skill.getImageLarge())) {
-            return DiyApi.Helper.normalizeUrl(skill.getImageLarge());
+            return DiyApi.Helper.INSTANCE.normalizeUrl(skill.getImageLarge());
         } else if (!TextUtils.isEmpty(skill.getImageMedium())) {
-            return DiyApi.Helper.normalizeUrl(skill.getImageMedium());
+            return DiyApi.Helper.INSTANCE.normalizeUrl(skill.getImageMedium());
         } else if (!TextUtils.isEmpty(skill.getImageSmall())) {
-            return DiyApi.Helper.normalizeUrl(skill.getImageSmall());
+            return DiyApi.Helper.INSTANCE.normalizeUrl(skill.getImageSmall());
         } else {
             return null;
         }

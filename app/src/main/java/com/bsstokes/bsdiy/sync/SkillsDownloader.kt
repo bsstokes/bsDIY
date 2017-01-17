@@ -4,14 +4,13 @@ import android.util.Log
 import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.sync.apiSkillToSkill
 import retrofit2.Response
 import rx.Observer
 
 internal class SkillsDownloader(private val diyApi: DiyApi, private val database: BsDiyDatabase) {
 
     fun syncSkills() {
-        diyApi.skills.subscribe(object : Observer<Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>> {
+        diyApi.getSkills().subscribe(object : Observer<Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>> {
             private val TAG = "DiyApi.getSkills"
 
             override fun onNext(response: Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>) {
