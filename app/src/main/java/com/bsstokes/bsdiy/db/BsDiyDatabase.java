@@ -23,7 +23,11 @@ public interface BsDiyDatabase {
 
     Observable<List<DiyApi.Challenge>> getChallenges(long skillId);
 
+    Observable<Challenge> getDbChallenge(long challengeId);
+
     Observable<DiyApi.Challenge> getChallenge(long challengeId);
+
+    void putChallenge(@NotNull Challenge challenge);
 
     void putChallenge(DiyApi.Challenge challenge, long skillId, int position);
 

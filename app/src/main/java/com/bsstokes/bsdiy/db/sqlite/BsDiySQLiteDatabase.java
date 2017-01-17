@@ -4,11 +4,16 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.api.DiyApi;
 import com.bsstokes.bsdiy.db.BsDiyDatabase;
+import com.bsstokes.bsdiy.db.Challenge;
 import com.bsstokes.bsdiy.db.Skill;
 import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapper;
+import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMapping;
+import com.bsstokes.bsdiy.db.sqlite.mappers.ChallengeMappingKt;
 import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMapping;
 import com.bsstokes.bsdiy.db.sqlite.mappers.SkillMappingKt;
 import com.squareup.sqlbrite.BriteDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -70,10 +75,22 @@ public class BsDiySQLiteDatabase implements BsDiyDatabase {
     }
 
     @Override
+    public Observable<Challenge> getDbChallenge(long challengeId) {
+        final String challengeIdString = String.valueOf(challengeId);
+        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, "SELECT * FROM challenges WHERE _id = ? LIMIT 1", challengeIdString)
+                .mapToOneOrDefault(ChallengeMapping.M.INSTANCE, null);
+    }
+
+    @Override
     public Observable<DiyApi.Challenge> getChallenge(long challengeId) {
         final String challengeIdString = String.valueOf(challengeId);
         return briteDatabase.createQuery("challenges", "SELECT * FROM challenges WHERE _id = ? LIMIT 1", challengeIdString)
                 .mapToOneOrDefault(new ChallengeMapper.CursorToChallenge(), null);
+    }
+
+    @Override
+    public void putChallenge(@NotNull Challenge challenge) {
+        briteDatabase.insert(ChallengeMapping.Table.NAME, ChallengeMappingKt.toContentValues(challenge), CONFLICT_REPLACE);
     }
 
     @Override

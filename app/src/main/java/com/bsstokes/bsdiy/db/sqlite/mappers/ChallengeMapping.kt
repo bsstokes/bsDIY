@@ -48,7 +48,7 @@ fun Challenge.toContentValues(): ContentValues {
 
 fun Cursor.toChallenge(): Challenge {
     return Challenge(
-            id = Db.getLong(this, SkillMapping.Columns.ID),
+            id = Db.getLong(this, ChallengeMapping.Columns.ID),
             skillId = Db.getLong(this, ChallengeMapping.Columns.SKILL_ID),
             active = Db.getBoolean(this, ChallengeMapping.Columns.ACTIVE),
             title = Db.getString(this, ChallengeMapping.Columns.TITLE),
