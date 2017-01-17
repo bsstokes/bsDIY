@@ -4,7 +4,7 @@ import android.util.Log
 import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.sync.mappers.SkillMapping.Companion.toSkill
+import com.bsstokes.bsdiy.sync.mappers.apiSkillToSkill
 import retrofit2.Response
 import rx.Observer
 
@@ -41,7 +41,7 @@ internal class SkillsDownloader(private val diyApi: DiyApi, private val database
     }
 
     private fun onDownloadSkills(apiSkills: List<DiyApi.Skill>) {
-        val skills: List<Skill> = apiSkills.map { apiSkill -> apiSkill.toSkill() }
+        val skills: List<Skill> = apiSkills.map(::apiSkillToSkill)
         database.putSkills(skills)
     }
 }
