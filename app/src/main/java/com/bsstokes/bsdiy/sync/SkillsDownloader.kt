@@ -12,14 +12,14 @@ internal class SkillsDownloader(private val diyApi: DiyApi, private val database
 
     fun syncSkills() {
         diyApi.skills.subscribe(object : Observer<Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>> {
-            private val TAG = "DiyApi getSkills"
+            private val TAG = "DiyApi.getSkills"
 
             override fun onNext(response: Response<DiyApi.DiyResponse<List<DiyApi.Skill>>>) {
                 onDownloadSkillsResponse(response)
             }
 
             override fun onError(e: Throwable) {
-                Log.e(TAG, "onError: diyApi getSkills", e)
+                Log.e(TAG, "onError: DiyApi.getSkills()", e)
             }
 
             override fun onCompleted() {

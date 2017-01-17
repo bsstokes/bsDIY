@@ -16,14 +16,14 @@ internal class ChallengesDownloader(private val diyApi: DiyApi, private val data
 
     fun syncChallenges() {
         diyApi.getChallenges(skillUrl).subscribe(object : Observer<Response<DiyApi.DiyResponse<List<DiyApi.Challenge>>>> {
-            private val TAG = "DiyApi getChallenges"
+            private val TAG = "DiyApi.getChallenges"
 
             override fun onNext(response: Response<DiyApi.DiyResponse<List<DiyApi.Challenge>>>) {
                 onDownloadChallengesResponse(response)
             }
 
             override fun onError(e: Throwable) {
-                Log.e(TAG, "onError: diyApi getChallenges", e)
+                Log.e(TAG, "onError: DiyApi.getChallenges($skillUrl)", e)
             }
 
             override fun onCompleted() {
@@ -33,18 +33,18 @@ internal class ChallengesDownloader(private val diyApi: DiyApi, private val data
     }
 
     private fun onDownloadChallengesResponse(response: Response<DiyApi.DiyResponse<List<DiyApi.Challenge>>>?) {
-        if (null != response && null != response.body()) {
-            onDownloadSkillsResponse(response.body())
+        response?.body()?.let {
+            onDownloadSkillsResponse(it)
         }
     }
 
-    private fun onDownloadSkillsResponse(challengesResponse: DiyApi.DiyResponse<List<DiyApi.Challenge>>?) {
-        if (null != challengesResponse && null != challengesResponse.response) {
-            onDownloadChallenge(challengesResponse.response)
+    private fun onDownloadSkillsResponse(challengesResponse: DiyApi.DiyResponse<List<DiyApi.Challenge>>) {
+        challengesResponse.response?.let {
+            onDownloadChallenge(it)
         }
     }
 
-    private fun onDownloadChallenge(challenges: List<DiyApi.Challenge>?) {
+    private fun onDownloadChallenge(challenges: List<DiyApi.Challenge>) {
         val skill = database.getSkillByUrl(skillUrl)
                 .subscribeOn(Schedulers.immediate())
                 .observeOn(Schedulers.immediate())
@@ -56,9 +56,7 @@ internal class ChallengesDownloader(private val diyApi: DiyApi, private val data
             return
         }
 
-        challenges?.let {
-            saveChallenges(challenges, skill.id)
-        }
+        saveChallenges(challenges, skill.id)
     }
 
     private fun saveChallenges(apiChallenges: List<DiyApi.Challenge>, skillId: Long) {
