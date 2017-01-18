@@ -20,10 +20,6 @@ interface DiyApi {
 
     object Helper {
         fun normalizeUrl(url: String): String {
-            if (url.isBlank()) {
-                return url
-            }
-
             val httpUrl: HttpUrl? = if (url.startsWith("http", ignoreCase = true)) {
                 HttpUrl.parse(url)
             } else {
