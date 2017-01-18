@@ -13,7 +13,6 @@ import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.db.Challenge
 import com.bsstokes.bsdiy.db.Skill
-import com.bsstokes.bsdiy.ui.ActionBarHelper
 import com.squareup.picasso.Picasso
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -55,12 +54,12 @@ class ChallengeActivity : AppCompatActivity() {
         requireNotNull(database)
         requireNotNull(picasso)
 
-        if (null != intent) {
+        intent?.let {
             skillId = intent.getLongExtra(EXTRA_SKILL_ID, skillId)
             challengeId = intent.getLongExtra(EXTRA_CHALLENGE_ID, challengeId)
         }
 
-        ActionBarHelper.setDisplayShowHomeEnabled(this)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {
