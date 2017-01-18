@@ -14,7 +14,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.bsstokes.bsdiy.R
-import com.bsstokes.bsdiy.SkillActivity
+import com.bsstokes.bsdiy.skill.SkillActivity
 import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.sync.ApiSyncService
