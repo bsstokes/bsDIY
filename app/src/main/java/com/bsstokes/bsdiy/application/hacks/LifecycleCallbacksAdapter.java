@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.hacks;
+package com.bsstokes.bsdiy.application.hacks;
 
 import android.app.Activity;
 import android.app.Application;

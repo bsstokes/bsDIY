@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 
 import com.bsstokes.bsdiy.application.di.AppComponent;
 import com.bsstokes.bsdiy.application.di.ComponentFactory;
+import com.bsstokes.bsdiy.application.hacks.IMMLeaks;
 import com.bsstokes.bsdiy.application.initializers.StethoInitializer;
-import com.bsstokes.bsdiy.hacks.IMMLeaks;
 import com.crashlytics.android.Crashlytics;
 import com.squareup.leakcanary.LeakCanary;
 
