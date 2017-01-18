@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy;
+package com.bsstokes.bsdiy.app.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bsstokes.bsdiy.R;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.app.explore.ExploreFragment;
 import com.bsstokes.bsdiy.app.messages.MessagesFragment;
