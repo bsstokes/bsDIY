@@ -19,7 +19,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
         ).mapToList<Skill>(SkillMapping.M)
     }
 
-    override fun getSkill(skillId: Long): Observable<Skill> {
+    override fun getSkill(skillId: Long): Observable<Skill?> {
         val skillIdString = skillId.toString()
         return briteDatabase.createQuery(SkillMapping.Table.NAME, """
                 SELECT * FROM ${SkillMapping.Table.NAME} WHERE ${SkillMapping.Columns.ID}=? LIMIT 1
@@ -28,7 +28,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
         ).mapToOneOrDefault<Skill>(SkillMapping.M, null)
     }
 
-    override fun getSkillByUrl(skillUrl: String): Observable<Skill> {
+    override fun getSkillByUrl(skillUrl: String): Observable<Skill?> {
         return briteDatabase.createQuery(SkillMapping.Table.NAME, """
                 SELECT * FROM ${SkillMapping.Table.NAME} WHERE ${SkillMapping.Columns.URL}=? LIMIT 1
                 """.trimMargin(),
@@ -57,7 +57,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
         ).mapToList<Challenge>(ChallengeMapping.M)
     }
 
-    override fun getChallenge(challengeId: Long): Observable<Challenge> {
+    override fun getChallenge(challengeId: Long): Observable<Challenge?> {
         val challengeIdString = challengeId.toString()
         return briteDatabase.createQuery(ChallengeMapping.Table.NAME, """
                 SELECT * FROM ${ChallengeMapping.Table.NAME} WHERE ${ChallengeMapping.Columns.ID}=? LIMIT 1

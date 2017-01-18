@@ -5,9 +5,9 @@ import rx.Observable
 interface BsDiyDatabase {
     fun getAllSkills(): Observable<List<Skill>>
 
-    fun getSkill(skillId: Long): Observable<Skill>
+    fun getSkill(skillId: Long): Observable<Skill?>
 
-    fun getSkillByUrl(skillUrl: String): Observable<Skill>
+    fun getSkillByUrl(skillUrl: String): Observable<Skill?>
 
     fun putSkill(skill: Skill)
 
@@ -15,7 +15,7 @@ interface BsDiyDatabase {
 
     fun getChallenges(skillId: Long): Observable<List<Challenge>>
 
-    fun getChallenge(challengeId: Long): Observable<Challenge>
+    fun getChallenge(challengeId: Long): Observable<Challenge?>
 
     fun putChallenge(challenge: Challenge)
 
