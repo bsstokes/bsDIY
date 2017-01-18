@@ -9,7 +9,7 @@ import com.bsstokes.bsdiy.app.messages.MessagesFragment;
 import com.bsstokes.bsdiy.app.skills.SkillsFragment;
 import com.bsstokes.bsdiy.app.stream.StreamFragment;
 import com.bsstokes.bsdiy.sync.ApiSyncService;
-import com.bsstokes.bsdiy.to_dos.ToDosFragment;
+import com.bsstokes.bsdiy.app.to_dos.ToDosFragment;
 
 public interface AppComponent {
     // Application

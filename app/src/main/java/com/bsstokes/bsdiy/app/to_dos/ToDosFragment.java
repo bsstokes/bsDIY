@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.to_dos;
+package com.bsstokes.bsdiy.app.to_dos;
 
 import android.content.Context;
 import android.os.Bundle;

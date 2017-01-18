@@ -19,7 +19,7 @@ import com.bsstokes.bsdiy.app.explore.ExploreFragment;
 import com.bsstokes.bsdiy.app.messages.MessagesFragment;
 import com.bsstokes.bsdiy.app.skills.SkillsFragment;
 import com.bsstokes.bsdiy.app.stream.StreamFragment;
-import com.bsstokes.bsdiy.to_dos.ToDosFragment;
+import com.bsstokes.bsdiy.app.to_dos.ToDosFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
