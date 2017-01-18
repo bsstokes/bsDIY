@@ -7,7 +7,7 @@ interface SkillScreenContract {
         fun setDescription(description: String)
         fun loadPatchImage(patchImageUrl: String)
         fun clearChallengeViews()
-        fun loadChallengeView(challengeId: Long, title: String, heroImageUrl: String?);
+        fun loadChallengeView(challengeId: Long, title: String, heroImageUrl: String?)
         fun launchChallengeActivity(skillId: Long, challengeId: Long)
         fun startSyncChallengesService(skillUrl: String)
     }

@@ -16,7 +16,7 @@ import com.bsstokes.bsdiy.R;
  * that are expected from a vertical list implementation, such as
  * ListView.
  * <p>
- * From https://raw.githubusercontent.com/devunwired/recyclerview-playground/299515e0cfe4caea78eaf7ba12f7c9cf926b6063/app/src/main/java/com/example/android/recyclerplayground/GridDividerDecoration.java></https://raw.githubusercontent.com/devunwired/recyclerview-playground/299515e0cfe4caea78eaf7ba12f7c9cf926b6063/app/src/main/java/com/example/android/recyclerplayground/GridDividerDecoration.java
+ * From https://raw.githubusercontent.com/devunwired/recyclerview-playground/299515e0cfe4caea78eaf7ba12f7c9cf926b6063/app/src/main/java/com/example/android/recyclerplayground/GridDividerDecoration.java
  */
 public class GridDividerDecoration extends RecyclerView.ItemDecoration {
 

@@ -90,7 +90,7 @@ class SkillActivity : AppCompatActivity(), SkillScreenContract.View {
     }
 
     override fun clearChallengeViews() {
-        challengesViewGroup.removeAllViews();
+        challengesViewGroup.removeAllViews()
     }
 
     override fun loadChallengeView(challengeId: Long, title: String, heroImageUrl: String?) {
