@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".ChallengeActivity"/>
         <activity
-            android:name=".skill.SkillActivity"
+            android:name="com.bsstokes.bsdiy.app.skill.SkillActivity"
             android:parentActivityName=".MainActivity"/>
 
         <service

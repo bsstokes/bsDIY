@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.skill
+package com.bsstokes.bsdiy.app.skill
 
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.db.Challenge

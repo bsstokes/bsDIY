@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.skill
+package com.bsstokes.bsdiy.app.skill
 
 interface SkillScreenContract {
     interface View {
