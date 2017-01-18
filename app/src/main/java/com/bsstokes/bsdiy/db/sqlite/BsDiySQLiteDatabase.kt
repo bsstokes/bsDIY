@@ -22,7 +22,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                     ${SkillMapping.Columns.TITLE} ASC
                 """.trimIndent()
         return briteDatabase.createQuery(SkillMapping.Table.NAME, query)
-                .mapToList<Skill>(SkillMapping.M)
+                .mapToList<Skill>(SkillMapping.MAPPER)
     }
 
     override fun getSkill(skillId: Long): Observable<Skill?> {
@@ -33,7 +33,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                 LIMIT 1
                 """.trimIndent()
         return briteDatabase.createQuery(SkillMapping.Table.NAME, query, skillId.toString())
-                .mapToOneOrDefault<Skill>(SkillMapping.M, null)
+                .mapToOneOrDefault<Skill>(SkillMapping.MAPPER, null)
     }
 
     override fun getSkillByUrl(skillUrl: String): Observable<Skill?> {
@@ -44,7 +44,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                 LIMIT 1
                 """.trimIndent()
         return briteDatabase.createQuery(SkillMapping.Table.NAME, query, skillUrl)
-                .mapToOneOrDefault<Skill>(SkillMapping.M, null)
+                .mapToOneOrDefault<Skill>(SkillMapping.MAPPER, null)
     }
 
     override fun putSkill(skill: Skill) {
@@ -68,7 +68,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                     ${ChallengeMapping.Columns.SKILL_ID} ASC
                 """.trimIndent()
         return briteDatabase.createQuery(ChallengeMapping.Table.NAME, query, skillId.toString())
-                .mapToList<Challenge>(ChallengeMapping.M)
+                .mapToList<Challenge>(ChallengeMapping.MAPPER)
     }
 
     override fun getChallenge(challengeId: Long): Observable<Challenge?> {
@@ -79,7 +79,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                 LIMIT 1
                 """.trimIndent()
         return briteDatabase.createQuery(ChallengeMapping.Table.NAME, query, challengeId.toString())
-                .mapToOneOrDefault<Challenge>(ChallengeMapping.M, null)
+                .mapToOneOrDefault<Challenge>(ChallengeMapping.MAPPER, null)
     }
 
     override fun putChallenge(challenge: Challenge) {

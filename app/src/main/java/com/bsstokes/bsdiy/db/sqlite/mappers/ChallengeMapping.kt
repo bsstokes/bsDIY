@@ -23,7 +23,7 @@ class ChallengeMapping {
         const val POSITION = "position"
     }
 
-    object M : Func1<Cursor, Challenge?> {
+    object MAPPER : Func1<Cursor, Challenge?> {
         override fun call(t: Cursor?): Challenge? {
             return t?.toChallenge()
         }

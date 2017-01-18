@@ -25,7 +25,7 @@ class SkillMapping {
         const val PRIORITY = "priority"
     }
 
-    object M : Func1<Cursor, Skill?> {
+    object MAPPER : Func1<Cursor, Skill?> {
         override fun call(t: Cursor?): Skill? {
             return t?.toSkill()
         }
