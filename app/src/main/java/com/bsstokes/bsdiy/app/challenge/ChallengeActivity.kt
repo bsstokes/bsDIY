@@ -9,15 +9,9 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.bsstokes.bsdiy.R
-import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase
-import com.bsstokes.bsdiy.db.Challenge
-import com.bsstokes.bsdiy.db.Skill
 import com.squareup.picasso.Picasso
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
 import javax.inject.Inject
 
 class ChallengeActivity : AppCompatActivity() {
@@ -44,12 +38,15 @@ class ChallengeActivity : AppCompatActivity() {
 
     private var skillId: Long = 0
     private var challengeId: Long = 0
-    private val subscriptions = CompositeSubscription()
+
+    private lateinit var challengeScreen: ChallengeScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge)
         ButterKnife.bind(this)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         BsDiyApplication.getApplication(this).appComponent().inject(this)
         requireNotNull(database)
@@ -60,46 +57,39 @@ class ChallengeActivity : AppCompatActivity() {
             challengeId = intent.getLongExtra(EXTRA_CHALLENGE_ID, challengeId)
         }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        challengeScreen = ChallengeScreen(skillId = skillId, challengeId = challengeId, database = database, view = View())
     }
 
     override fun onResume() {
         super.onResume()
-
-        val getSkill = database.getSkill(skillId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { skill -> onLoadSkill(skill) }
-        subscriptions.add(getSkill)
-
-        val getChallenge = database.getChallenge(challengeId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { challenge -> onLoadChallenge(challenge) }
-        subscriptions.add(getChallenge)
+        challengeScreen.start()
     }
 
     override fun onPause() {
         super.onPause()
-        subscriptions.clear()
-    }
-
-    private fun onLoadSkill(skill: Skill?) {
-        skill?.iconMedium?.let {
-            picasso.load(DiyApi.Helper.normalizeUrl(skill.iconMedium)).into(patchImageView)
-        }
-    }
-
-    private fun onLoadChallenge(challenge: Challenge?) {
-        title = ""
-        challenge?.let {
-            titleTextView.text = challenge.title
-            descriptionTextView.text = challenge.description
-        }
+        challengeScreen.stop()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    inner class View : ChallengeScreenContract.View {
+        override fun setTitle(title: String) {
+            this@ChallengeActivity.title = title
+        }
+
+        override fun loadPatchImage(patchImageUrl: String) {
+            picasso.load(patchImageUrl).into(patchImageView)
+        }
+
+        override fun setChallengeTitle(title: String) {
+            titleTextView.text = title
+        }
+
+        override fun setDescription(description: String) {
+            descriptionTextView.text = description
+        }
     }
 }
