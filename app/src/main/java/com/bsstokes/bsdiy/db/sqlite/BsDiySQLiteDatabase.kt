@@ -13,7 +13,7 @@ import rx.Observable
 class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatabase {
 
     override fun getAllSkills(): Observable<List<Skill>> {
-        return briteDatabase.createQuery(SkillMapping.Table.NAME, """
+        val query = """
                 SELECT *
                 FROM ${SkillMapping.Table.NAME}
                 WHERE ${SkillMapping.Columns.ACTIVE}=1
@@ -21,30 +21,30 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                     ${SkillMapping.Columns.PRIORITY} DESC,
                     ${SkillMapping.Columns.TITLE} ASC
                 """.trimIndent()
-        ).mapToList<Skill>(SkillMapping.M)
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, query)
+                .mapToList<Skill>(SkillMapping.M)
     }
 
     override fun getSkill(skillId: Long): Observable<Skill?> {
-        val skillIdString = skillId.toString()
-        return briteDatabase.createQuery(SkillMapping.Table.NAME, """
+        val query = """
                 SELECT *
                 FROM ${SkillMapping.Table.NAME}
                 WHERE ${SkillMapping.Columns.ID}=?
                 LIMIT 1
-                """.trimIndent(),
-                skillIdString
-        ).mapToOneOrDefault<Skill>(SkillMapping.M, null)
+                """.trimIndent()
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, query, skillId.toString())
+                .mapToOneOrDefault<Skill>(SkillMapping.M, null)
     }
 
     override fun getSkillByUrl(skillUrl: String): Observable<Skill?> {
-        return briteDatabase.createQuery(SkillMapping.Table.NAME, """
+        val query = """
                 SELECT *
                 FROM ${SkillMapping.Table.NAME}
                 WHERE ${SkillMapping.Columns.URL}=?
                 LIMIT 1
-                """.trimIndent(),
-                skillUrl
-        ).mapToOneOrDefault<Skill>(SkillMapping.M, null)
+                """.trimIndent()
+        return briteDatabase.createQuery(SkillMapping.Table.NAME, query, skillUrl)
+                .mapToOneOrDefault<Skill>(SkillMapping.M, null)
     }
 
     override fun putSkill(skill: Skill) {
@@ -58,8 +58,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
     }
 
     override fun getChallenges(skillId: Long): Observable<List<Challenge>> {
-        val skillIdString = skillId.toString()
-        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, """
+        val query = """
                 SELECT *
                 FROM ${ChallengeMapping.Table.NAME}
                 WHERE ${ChallengeMapping.Columns.SKILL_ID}=?
@@ -67,21 +66,20 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                 ORDER BY
                     ${ChallengeMapping.Columns.POSITION} ASC,
                     ${ChallengeMapping.Columns.SKILL_ID} ASC
-                """.trimIndent(),
-                skillIdString
-        ).mapToList<Challenge>(ChallengeMapping.M)
+                """.trimIndent()
+        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, query, skillId.toString())
+                .mapToList<Challenge>(ChallengeMapping.M)
     }
 
     override fun getChallenge(challengeId: Long): Observable<Challenge?> {
-        val challengeIdString = challengeId.toString()
-        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, """
+        val query = """
                 SELECT *
                 FROM ${ChallengeMapping.Table.NAME}
                 WHERE ${ChallengeMapping.Columns.ID}=?
                 LIMIT 1
-                """.trimIndent(),
-                challengeIdString
-        ).mapToOneOrDefault<Challenge>(ChallengeMapping.M, null)
+                """.trimIndent()
+        return briteDatabase.createQuery(ChallengeMapping.Table.NAME, query, challengeId.toString())
+                .mapToOneOrDefault<Challenge>(ChallengeMapping.M, null)
     }
 
     override fun putChallenge(challenge: Challenge) {
