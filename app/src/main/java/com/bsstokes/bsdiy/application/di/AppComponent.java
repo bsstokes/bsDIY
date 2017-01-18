@@ -1,15 +1,14 @@
 package com.bsstokes.bsdiy.application.di;
 
 import com.bsstokes.bsdiy.app.challenge.ChallengeActivity;
-import com.bsstokes.bsdiy.app.main.MainActivity;
-import com.bsstokes.bsdiy.app.skill.SkillActivity;
-import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.app.explore.ExploreFragment;
 import com.bsstokes.bsdiy.app.messages.MessagesFragment;
+import com.bsstokes.bsdiy.app.skill.SkillActivity;
 import com.bsstokes.bsdiy.app.skills.SkillsFragment;
 import com.bsstokes.bsdiy.app.stream.StreamFragment;
-import com.bsstokes.bsdiy.sync.ApiSyncService;
 import com.bsstokes.bsdiy.app.to_dos.ToDosFragment;
+import com.bsstokes.bsdiy.application.BsDiyApplication;
+import com.bsstokes.bsdiy.sync.ApiSyncService;
 
 public interface AppComponent {
     // Application
@@ -17,8 +16,6 @@ public interface AppComponent {
 
     // Activities
     void inject(ChallengeActivity activity);
-
-    void inject(MainActivity activity);
 
     void inject(SkillActivity activity);
 
