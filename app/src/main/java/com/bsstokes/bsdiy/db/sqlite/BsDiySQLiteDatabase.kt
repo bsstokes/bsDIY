@@ -15,7 +15,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
     override fun getAllSkills(): Observable<List<Skill>> {
         return briteDatabase.createQuery(SkillMapping.Table.NAME, """
                 SELECT * FROM ${SkillMapping.Table.NAME} WHERE ${SkillMapping.Columns.ACTIVE}=1 ORDER BY ${SkillMapping.Columns.PRIORITY} DESC, ${SkillMapping.Columns.TITLE} ASC
-                """.trimMargin()
+                """.trimIndent()
         ).mapToList<Skill>(SkillMapping.M)
     }
 
@@ -23,7 +23,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
         val skillIdString = skillId.toString()
         return briteDatabase.createQuery(SkillMapping.Table.NAME, """
                 SELECT * FROM ${SkillMapping.Table.NAME} WHERE ${SkillMapping.Columns.ID}=? LIMIT 1
-                """.trimMargin(),
+                """.trimIndent(),
                 skillIdString
         ).mapToOneOrDefault<Skill>(SkillMapping.M, null)
     }
@@ -31,7 +31,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
     override fun getSkillByUrl(skillUrl: String): Observable<Skill?> {
         return briteDatabase.createQuery(SkillMapping.Table.NAME, """
                 SELECT * FROM ${SkillMapping.Table.NAME} WHERE ${SkillMapping.Columns.URL}=? LIMIT 1
-                """.trimMargin(),
+                """.trimIndent(),
                 skillUrl
         ).mapToOneOrDefault<Skill>(SkillMapping.M, null)
     }
@@ -52,7 +52,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
                 SELECT * FROM ${ChallengeMapping.Table.NAME}
                 WHERE ${ChallengeMapping.Columns.SKILL_ID}=? AND ${ChallengeMapping.Columns.ACTIVE}=1
                 ORDER BY ${ChallengeMapping.Columns.POSITION} ASC, ${ChallengeMapping.Columns.SKILL_ID} ASC
-                """.trimMargin(),
+                """.trimIndent(),
                 skillIdString
         ).mapToList<Challenge>(ChallengeMapping.M)
     }
@@ -61,7 +61,7 @@ class BsDiySQLiteDatabase(private val briteDatabase: BriteDatabase) : BsDiyDatab
         val challengeIdString = challengeId.toString()
         return briteDatabase.createQuery(ChallengeMapping.Table.NAME, """
                 SELECT * FROM ${ChallengeMapping.Table.NAME} WHERE ${ChallengeMapping.Columns.ID}=? LIMIT 1
-                """.trimMargin(),
+                """.trimIndent(),
                 challengeIdString
         ).mapToOneOrDefault<Challenge>(ChallengeMapping.M, null)
     }
