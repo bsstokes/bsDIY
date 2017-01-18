@@ -5,7 +5,7 @@ import com.bsstokes.bsdiy.MainActivity;
 import com.bsstokes.bsdiy.app.skill.SkillActivity;
 import com.bsstokes.bsdiy.application.BsDiyApplication;
 import com.bsstokes.bsdiy.app.explore.ExploreFragment;
-import com.bsstokes.bsdiy.messages.MessagesFragment;
+import com.bsstokes.bsdiy.app.messages.MessagesFragment;
 import com.bsstokes.bsdiy.skills.SkillsFragment;
 import com.bsstokes.bsdiy.stream.StreamFragment;
 import com.bsstokes.bsdiy.sync.ApiSyncService;

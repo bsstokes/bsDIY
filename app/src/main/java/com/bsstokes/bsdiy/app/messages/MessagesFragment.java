@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.messages;
+package com.bsstokes.bsdiy.app.messages;
 
 import android.content.Context;
 import android.os.Bundle;
