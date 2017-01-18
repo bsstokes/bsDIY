@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ChallengeActivity"/>
+        <activity android:name=".app.challenge.ChallengeActivity"/>
         <activity
             android:name="com.bsstokes.bsdiy.app.skill.SkillActivity"
             android:parentActivityName=".MainActivity"/>

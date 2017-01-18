@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.application.di;
 
-import com.bsstokes.bsdiy.ChallengeActivity;
+import com.bsstokes.bsdiy.app.challenge.ChallengeActivity;
 import com.bsstokes.bsdiy.MainActivity;
 import com.bsstokes.bsdiy.app.skill.SkillActivity;
 import com.bsstokes.bsdiy.application.BsDiyApplication;

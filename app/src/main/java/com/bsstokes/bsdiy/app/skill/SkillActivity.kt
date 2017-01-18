@@ -12,7 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.bsstokes.bsdiy.ChallengeActivity
+import com.bsstokes.bsdiy.app.challenge.ChallengeActivity
 import com.bsstokes.bsdiy.R
 import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase

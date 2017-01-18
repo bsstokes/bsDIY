@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy
+package com.bsstokes.bsdiy.app.challenge
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.bsstokes.bsdiy.R
 import com.bsstokes.bsdiy.api.DiyApi
 import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase
