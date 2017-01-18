@@ -18,7 +18,7 @@ import com.bsstokes.bsdiy.app.skill.SkillActivity
 import com.bsstokes.bsdiy.application.BsDiyApplication
 import com.bsstokes.bsdiy.db.BsDiyDatabase
 import com.bsstokes.bsdiy.sync.ApiSyncService
-import com.bsstokes.bsdiy.ui.GridDividerDecoration
+import com.bsstokes.bsdiy.app.ui.GridDividerDecoration
 import com.squareup.picasso.Picasso
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

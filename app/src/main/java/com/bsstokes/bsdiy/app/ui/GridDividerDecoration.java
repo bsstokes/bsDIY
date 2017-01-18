@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.ui;
+package com.bsstokes.bsdiy.app.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
