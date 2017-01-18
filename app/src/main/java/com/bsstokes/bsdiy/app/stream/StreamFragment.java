@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.stream;
+package com.bsstokes.bsdiy.app.stream;
 
 import android.content.Context;
 import android.os.Bundle;
