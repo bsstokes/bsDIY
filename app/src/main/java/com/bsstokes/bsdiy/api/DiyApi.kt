@@ -1,6 +1,6 @@
 package com.bsstokes.bsdiy.api
 
-import android.net.Uri
+import okhttp3.HttpUrl
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,13 +24,13 @@ interface DiyApi {
                 return url
             }
 
-            val uri = Uri.parse(url)
-            val scheme: String = uri.scheme ?: ""
-            if (scheme.isBlank()) {
-                return uri.buildUpon().scheme("https").build().toString()
+            val httpUrl: HttpUrl? = if (url.startsWith("http", ignoreCase = true)) {
+                HttpUrl.parse(url)
             } else {
-                return uri.toString()
+                HttpUrl.parse("https:" + url)
             }
+
+            return httpUrl?.toString() ?: ""
         }
     }
 
