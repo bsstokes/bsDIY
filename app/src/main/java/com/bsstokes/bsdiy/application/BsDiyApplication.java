@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.bsstokes.bsdiy.application.di.AppComponent;
 import com.bsstokes.bsdiy.application.di.ComponentFactory;
 import com.bsstokes.bsdiy.application.initializers.StethoInitializer;
+import com.bsstokes.bsdiy.hacks.IMMLeaks;
 import com.crashlytics.android.Crashlytics;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -41,6 +42,7 @@ public class BsDiyApplication extends Application {
         appComponent = ComponentFactory.create(this);
         appComponent.inject(this);
 
+        IMMLeaks.fixFocusedViewLeak(this);
         StethoInitializer.initialize(this);
     }
 
