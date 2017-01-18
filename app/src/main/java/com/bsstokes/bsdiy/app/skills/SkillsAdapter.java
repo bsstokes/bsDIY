@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.skills;
+package com.bsstokes.bsdiy.app.skills;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
