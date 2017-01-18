@@ -1,4 +1,4 @@
-package com.bsstokes.bsdiy.explore;
+package com.bsstokes.bsdiy.app.explore;
 
 import android.content.Context;
 import android.os.Bundle;

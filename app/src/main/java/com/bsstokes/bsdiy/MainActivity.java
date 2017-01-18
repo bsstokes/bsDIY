@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bsstokes.bsdiy.application.BsDiyApplication;
-import com.bsstokes.bsdiy.explore.ExploreFragment;
+import com.bsstokes.bsdiy.app.explore.ExploreFragment;
 import com.bsstokes.bsdiy.messages.MessagesFragment;
 import com.bsstokes.bsdiy.skills.SkillsFragment;
 import com.bsstokes.bsdiy.stream.StreamFragment;
