@@ -5,6 +5,9 @@ dependencies:
     - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
     - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.2"
 
+  override:
+    - gradle dependencies || true
+
 test:
   override:
     # start the emulator
